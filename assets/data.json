@@ -1,0 +1,58 @@
+{
+  "status": 200,
+  "message": "Succeed",
+  "data": [
+    {
+      "fullName": "Albert Patrick Sankoh",
+      "PhoneNumber": "23276102030",
+      "emailId": "albert.sankoh@gmail.com",
+      "userName": null,
+      "country": "Sierra Leone",
+      "city": "Freetown",
+      "age": "32",
+      "password": "123456",
+      "future1": "Date of Registration: 01-Aug-2021/Area of Specialization: ICT/District of Origin: Bo/Employer During Primary Assignment: Ministry Of Health/Community of Primary Assignment: Goderich/Type of Assignment: TypeA/Period Covered by Report: Second Quarter/Period: 2007-20011/Institution: IPAM/Qualification: Bsc",
+      "future2": "Town: Goderich/District: Western Area/NYS Call up Number: 12345/Place of primary assignment: Ministry of Health",
+      "future3": "Local Government Area: Western Urban/Community Development Project: Provision of Clean Drinking Water/Location of the Project: Marjay Town"
+    },
+    {
+      "fullName": "Sajid",
+      "PhoneNumber": "030000000",
+      "emailId": "sajid@mail.com",
+      "userName": null,
+      "country": "SL",
+      "city": "City Name",
+      "age": "30",
+      "password": "password123",
+      "future1": "Date of Registration: 25-08-2021/Area of Specialization: CS/District of Origin: PEW/Employer During Primary Assignment: empl/Community of Primary Assignment: community/Type of Assignment: type of assign/Period Covered by Report: 2020/Period: 2020/Institution: 2021/Qualification: MS",
+      "future2": "Town: town name/District: district name/NYS Call up Number: 09000/Place of primary assignment: place of primary assign",
+      "future3": "Local Government Area: PEW/Community Development Project: UNDP/Location of the Project: SL country"
+    },
+    {
+      "fullName": "shahab",
+      "PhoneNumber": "0300000000",
+      "emailId": "shahab@mail.com",
+      "userName": null,
+      "country": "string",
+      "city": "string",
+      "age": "0",
+      "password": "string",
+      "future1": "Date of Registration: string/Area of Specialization: string/District of Origin: string/Employer During Primary Assignment: string/Community of Primary Assignment: string/Type of Assignment: string/Period Covered by Report: string/Period_Institution_Qualification: string",
+      "future2": "Town: string/District: string/NYS Call up Number: string/Place of primary assignment: string",
+      "future3": "Local Government Area: string/Community Development Project: string/Location of the Project: string"
+    },
+    {
+      "fullName": "string",
+      "PhoneNumber": "string",
+      "emailId": "string",
+      "userName": null,
+      "country": "string",
+      "city": "string",
+      "age": "0",
+      "password": "string",
+      "future1": "Date of Registration: string/Area of Specialization: string/District of Origin: string/Employer During Primary Assignment: string/Community of Primary Assignment: string/Type of Assignment: string/Period Covered by Report: string/Period_Institution_Qualification: string",
+      "future2": "Town: string/District: string/NYS Call up Number: string/Place of primary assignment: string",
+      "future3": "Local Government Area: string/Community Development Project: string/Location of the Project: string"
+    }
+  ]
+}
