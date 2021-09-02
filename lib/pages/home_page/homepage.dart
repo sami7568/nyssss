@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:project1/api/APIService.dart';
+
+
 import 'package:project1/model/category_model.dart';
 import 'package:project1/model/login_model.dart';
+
+import 'package:project1/pages/home_page/category1.dart';
 import 'package:project1/pages/home_page/drawer.dart';
 import 'package:project1/widgets/widgets.dart';
 
@@ -16,86 +21,67 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  APIServices apiServices = new APIServices();
-
-  List<Datum> _cat;
-
-  loadData(){
-    return apiServices.fetchDatum();
-  }
 
 
-
-  @override
-  void initState() { 
-    super.initState();
-  
-    apiServices.fetchDatum().then((cat){
-      _cat = cat;
-      
-    });
-  }
-  
 
   @override
   Widget build(BuildContext context) {
   
   
-    return Stack(
-      children: [
-        BackgroundImage(),
-        Scaffold(
-          drawer: MyDrawer(),
-          appBar: AppBar(
-            elevation: 0.0,
-            backgroundColor: Colors.white,
-            iconTheme: IconThemeData(color: Colors.black),
-          ),
-          backgroundColor: Colors.transparent,
-          body: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 20, bottom: 30),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Image.asset(
-                  "assets/nys-logo.jpeg",
-                  height: 180,
+    return Scaffold(
+      body: SafeArea(child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 25),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Discover", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
+            Text("find", style: TextStyle(color: Colors.grey),),
+            SizedBox(height: 20,),
+            Expanded(
+                  flex: 2,
+                  child:  FutureBuilder(
+                  future: APIServices().fetchDatum(),
+                  builder: (
+                    context, snapshot){
+                      if(!snapshot.hasData){
+                        return Center(child: CircularProgressIndicator());
+                      }else{
+                        return ListView.builder(
+                          itemCount: snapshot.data.length,
+                          itemBuilder:(context,index){
+                            return GestureDetector(
+                              onTap: () async{
+                               setState(() {
+                                 typeId = snapshot.data[index].id;
+                                 // qType.setId(snapshot.data[index].id);
+                               });
+                                 print("questionType selected is");
+                                
+                                
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Category1()));
+                              },
+                              child: Container(
+                                height: 60,
+                                width: 100,
+                                child: Card(
+                                  
+                                  color: Colors.grey,
+                                  
+                                  
+                                  child: Center(child: Text(snapshot.data[index].name)),
+                                ),
+                              ),
+                            );
+                          }
+                           );
+                      }
+                    }
                 ),
-                SizedBox(height: 30),
-                Text(
-                  "Home",
-                  style: TextStyle(
-                      color: blueColor(),
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold),
+              
                 ),
-                SizedBox(
-                  height: 30,
-                ),
-                ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: null == _cat ? 0 : _cat.length,
-                    itemBuilder: (context, index) {
-                      Datum cat = _cat[index]; 
-                      return ListTile(
-                        
-                        title: Text(cat.name, style: TextStyle(color: Colors.black, fontSize: 10),),
-                      );
-                    }),
-                SizedBox(height: 40),
-                Center(
-                  child: Text(
-                    "dataEst dolor sadipscing ut vero eirmod nonumy lorem justo no. \n Sadipscing sit eirmod est eirmod.",
-                    style: TextStyle(
-                      fontSize: 10,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ],
+          ],
+
+      ),),),
     );
   }
 }

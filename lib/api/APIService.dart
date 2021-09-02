@@ -1,17 +1,21 @@
+
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:project1/model/category_model.dart';
 import 'package:project1/model/login_model.dart';
+import 'package:project1/model/question1_model.dart';
+
 import 'package:project1/model/signUp_model.dart';
-import 'package:project1/pages/home_page/homepage.dart';
-import 'package:project1/pages/login.dart';
+import 'package:project1/widgets/widgets.dart';
+
+ int typeId = 0;
 
 class APIServices {
-  String accessToken =
-      "MKNoqMH8lH57Nm1HDkcefOq24pCOLO3tSDN_euSVHwkT4DUbNqBvJ0PMmBfxkW8jBXUpJGUe1rFTsYxf6dGdJIbmvAdXOgUZO0C6c5eTHiTCkGQkfGoRDZ2puENzehFk6zV43JkOb-rtJjskeRKfQHsaXYpkXkbXZuaSCcI3cIMY81BSW_VGdk_pMmnl1fZ3cqxv0GcopSj42Mm-3zvhhfJaCAFcMACFD4ytYBEXdAqXfpaSJl0fxu546YXrBbxYFlv8skwo26HV3d5GigOicUQIjUXP0v03gjchyjns6TI-Yf3kMDCY62gXKLblPhT-";
+
+ 
+  // String accessToken =
+  //     "oDeWtZWM_QQcfsj5bcJotADwsojgrXpLq-fKt2te3mi6u7DOJwxF7hFVN7eNX_Pm7N9a-Z7YhaWZqnYcxtPClE05pW5AZcCWo9PM7IEyEslb1H-vHDfsNkWpXTNkdgL_G3ioF2Tq2ECoAQA39ciVueyledStIqWRe-bDb8uKUWcbofyyVtuA_gmub1EivLQ0pseMx7qvcCWG-2twgSrWU5RkHdlwy0wclRF7T_Wax23TC-Jgy4J60O10bkkiGXOwptwggX_ejjHVyh8gwpxMsj1KNJs3qwBG-nutLLkE_WaMdu9MKL67uOUdw5f2vDnI";
   Future<Dio> launchDio() async {
     /// TODO: Settings for cache to be done here...
     Dio dio = new Dio();
@@ -20,7 +24,7 @@ class APIServices {
     //     DioCacheManager(CacheConfig(baseUrl: EndPoint.baseUrl)).interceptor);
     dio.options.headers['Content-Type'] = 'application/json';
     dio.options.headers["accept"] = 'application/json';
-    dio.options.headers["Authorization"] = 'Bearer $accessToken';
+    //dio.options.headers["Authorization"] = 'Bearer $accessToken';
 
     dio.options.followRedirects = false;
     dio.options.validateStatus = (s) {
@@ -60,7 +64,7 @@ class APIServices {
       String periodCoveredByreport,
       String period) async {
     Dio dio = await launchDio();
-    final response = await dio
+    Response response = await dio
         .post('https://nysapi.yestechsl.com/api/users/register', data: {
       "FullName": fullName,
       "Email": email,
@@ -92,38 +96,57 @@ class APIServices {
     if (response.statusCode == 200) {
       print('${response.data}');
     }
-    // Map<String, dynamic> map = json.decode(response.data);
-    // print(map);
-    // List<dynamic> jsonData = map["data"];
-    // print(jsonData);
+    
   }
 
   Future<LoginRequestModel> loginUser(String email, String password) async {
     Dio dio = await launchDio();
 
-    final response =
+    Response response =
         await dio.get('https://nysapi.yestechsl.com/api/users/getall');
     if (response.statusCode == 200) {
       print('${response.data}');
     }
   }
 
+//  List<Datum> datum = [];
   Future<List<Datum>> fetchDatum() async {
-    Dio dio = await launchDio();
+    Dio _dio = await launchDio();
 
-    final response = await dio
+    Response response = await _dio
         .get('https://nysapi.yestechsl.com/api/questions/getcategories');
     if (response.statusCode == 200) {
-      Map<String, dynamic> decodeCat =
-          jsonDecode(response.data);
-
-      final jsonData = Category.fromJson(decodeCat);
-      var productList = jsonData.data as List;
-      List<Datum> products = productList.map((e) => Datum.fromJson(e)).toList();
-
-      return products;
-    } else {
-      return List<Datum>();
-    }
+      Category category = Category.fromJson(response.data);
+      return category.data;
+      
   }
+}
+  
+
+   
+
+Future<List<Question>> monthCommSer() async {
+    Dio _dio = await launchDio();
+   
+    Response response = await _dio
+        .get('https://nysapi.yestechsl.com:443/api/questions/getbyquestiontype?QuestionType=${typeId}');
+    if (response.statusCode == 200) {
+      CatType categorytype = CatType.fromJson(response.data);
+      return categorytype.data;
+      
+  }
+}
+
+Future<EnumValues<QuestionType>> questType() async {
+    Dio _dio = await launchDio();
+   
+    Response response = await _dio
+        .get('https://nysapi.yestechsl.com:443/api/questions/getbyquestiontype?QuestionType=${typeId}');
+    if (response.statusCode == 200) {
+      
+      Question quesType = Question.fromJson(response.data);
+      // return quesType;
+      
+  }
+}
 }

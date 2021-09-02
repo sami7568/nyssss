@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project1/ProgressHUD.dart';
 import 'package:project1/api/APIService.dart';
-import 'package:project1/api/api_service.dart';
 import 'package:project1/model/login_model.dart';
 import 'package:project1/pages/home_page/homepage.dart';
 import 'package:project1/pages/signup/personal_info.dart';

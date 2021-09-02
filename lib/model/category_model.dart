@@ -19,6 +19,14 @@ class Category {
     String message;
     List<Datum> data;
 
+     // Get Item by ID
+  Datum getById(int id) =>
+      data.firstWhere((element) => element.id == id, orElse: null);
+
+  // Get Item by Position
+  Datum getByPosition(int pos) => data[pos];
+
+
     factory Category.fromJson(Map<String, dynamic> json) => Category(
         status: json["status"],
         message: json["message"],
@@ -51,6 +59,8 @@ class Datum {
         isActive: json["isActive"],
         isDeleted: json["isDeleted"],
     );
+
+  Datum.toString();
 
     Map<String, dynamic> toJson() => {
         "id": id,
