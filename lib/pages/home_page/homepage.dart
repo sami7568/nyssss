@@ -2,16 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/services.dart';
+
 import 'package:project1/api/APIService.dart';
 
 
-import 'package:project1/model/category_model.dart';
-import 'package:project1/model/login_model.dart';
 
-import 'package:project1/pages/home_page/category1.dart';
-import 'package:project1/pages/home_page/drawer.dart';
-import 'package:project1/widgets/widgets.dart';
+
+import 'package:project1/pages/home_page/category.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -58,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                                  print("questionType selected is");
                                 
                                 
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => Category1()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Category()));
                               },
                               child: Container(
                                 height: 60,

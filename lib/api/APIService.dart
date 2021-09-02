@@ -129,7 +129,7 @@ Future<List<Question>> monthCommSer() async {
     Dio _dio = await launchDio();
    
     Response response = await _dio
-        .get('https://nysapi.yestechsl.com:443/api/questions/getbyquestiontype?QuestionType=${typeId}');
+        .get('https://nysapi.yestechsl.com:443/api/questions/getbycategory?Category=${typeId}');
     if (response.statusCode == 200) {
       CatType categorytype = CatType.fromJson(response.data);
       return categorytype.data;
@@ -137,16 +137,16 @@ Future<List<Question>> monthCommSer() async {
   }
 }
 
-Future<EnumValues<QuestionType>> questType() async {
-    Dio _dio = await launchDio();
+// Future<EnumValues<QuestionType>> questType() async {
+//     Dio _dio = await launchDio();
    
-    Response response = await _dio
-        .get('https://nysapi.yestechsl.com:443/api/questions/getbyquestiontype?QuestionType=${typeId}');
-    if (response.statusCode == 200) {
+//     Response response = await _dio
+//         .get('https://nysapi.yestechsl.com:443/api/questions/getbyquestiontype?QuestionType=${typeId}');
+//     if (response.statusCode == 200) {
       
-      Question quesType = Question.fromJson(response.data);
-      // return quesType;
+//       Question quesType = Question.fromJson(response.data);
+//       return 
       
-  }
-}
+//   }
+// }
 }

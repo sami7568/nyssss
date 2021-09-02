@@ -1,22 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RadChoice extends StatefulWidget {
+class RadPFGE extends StatefulWidget {
   @override
-  _RadChoiceState createState() => _RadChoiceState();
+  _RadPFGEState createState() => _RadPFGEState();
 }
 
-class _RadChoiceState extends State<RadChoice> {
+class _RadPFGEState extends State<RadPFGE> {
+
+  
   int val = -1;
   @override
   Widget build(BuildContext context) {
     return Container(
+
       color: Colors.grey[300],
       child: Column(
+        
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           ListTile(
-            title: Text("Choice 1"),
+            title: Text("Poor"),
             leading: Radio(
               value: 1,
               groupValue: val,
@@ -29,7 +33,7 @@ class _RadChoiceState extends State<RadChoice> {
             ),
           ),
           ListTile(
-            title: Text("Choice 2"),
+            title: Text("Fair"),
             leading: Radio(
               value: 2,
               groupValue: val,
@@ -42,7 +46,7 @@ class _RadChoiceState extends State<RadChoice> {
             ),
           ),
           ListTile(
-            title: Text("Choice 3"),
+            title: Text("Good"),
             leading: Radio(
               value: 3,
               groupValue: val,
@@ -55,7 +59,7 @@ class _RadChoiceState extends State<RadChoice> {
             ),
           ),
           ListTile(
-            title: Text("Choice 4"),
+            title: Text("Excellent"),
             leading: Radio(
               value: 4,
               groupValue: val,
@@ -67,6 +71,56 @@ class _RadChoiceState extends State<RadChoice> {
               activeColor: Colors.black,
             ),
           ),
+        ],
+      ),
+    );
+  }
+}
+
+
+class RadYN extends StatefulWidget {
+  @override
+  _RadYNState createState() => _RadYNState();
+}
+
+class _RadYNState extends State<RadYN> {
+  int val = -1;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+
+      color: Colors.grey[300],
+      child: Column(
+        
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ListTile(
+            title: Text("Yes"),
+            leading: Radio(
+              value: 1,
+              groupValue: val,
+              onChanged: (value) {
+                setState(() {
+                  val = value;
+                });
+              },
+              activeColor: Colors.black,
+            ),
+          ),
+          ListTile(
+            title: Text("No"),
+            leading: Radio(
+              value: 2,
+              groupValue: val,
+              onChanged: (value) {
+                setState(() {
+                  val = value;
+                });
+              },
+              activeColor: Colors.black,
+            ),
+          ),
+          
         ],
       ),
     );
