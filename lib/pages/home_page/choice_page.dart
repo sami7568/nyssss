@@ -2,13 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RadPFGE extends StatefulWidget {
+   
+  const RadPFGE({
+    Key key,
+    
+  }) : super(key: key);
   @override
   _RadPFGEState createState() => _RadPFGEState();
 }
 
 class _RadPFGEState extends State<RadPFGE> {
 
-  
   int val = -1;
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,8 @@ class _RadPFGEState extends State<RadPFGE> {
                 setState(() {
                   val = value;
                 });
+                pfge(val);
+                
               },
               activeColor: Colors.black,
             ),
@@ -41,6 +47,7 @@ class _RadPFGEState extends State<RadPFGE> {
                 setState(() {
                   val = value;
                 });
+                pfge(val);
               },
               activeColor: Colors.black,
             ),
@@ -54,6 +61,7 @@ class _RadPFGEState extends State<RadPFGE> {
                 setState(() {
                   val = value;
                 });
+                pfge(val);
               },
               activeColor: Colors.black,
             ),
@@ -67,6 +75,7 @@ class _RadPFGEState extends State<RadPFGE> {
                 setState(() {
                   val = value;
                 });
+                pfge(val);
               },
               activeColor: Colors.black,
             ),
@@ -74,6 +83,10 @@ class _RadPFGEState extends State<RadPFGE> {
         ],
       ),
     );
+  }
+  void pfge(int value){
+    print("poor dash dash data ");
+    print(value);
   }
 }
 
@@ -103,6 +116,7 @@ class _RadYNState extends State<RadYN> {
                 setState(() {
                   val = value;
                 });
+                print(val);
               },
               activeColor: Colors.black,
             ),
@@ -116,6 +130,7 @@ class _RadYNState extends State<RadYN> {
                 setState(() {
                   val = value;
                 });
+                print(val);
               },
               activeColor: Colors.black,
             ),
@@ -124,5 +139,9 @@ class _RadYNState extends State<RadYN> {
         ],
       ),
     );
+  }
+  void yn(int value){
+    print("poor dash dash data ");
+    print(value);
   }
 }

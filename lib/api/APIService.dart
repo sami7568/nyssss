@@ -7,6 +7,7 @@ import 'package:project1/model/login_model.dart';
 import 'package:project1/model/question1_model.dart';
 
 import 'package:project1/model/signUp_model.dart';
+import 'package:project1/model/submit_model.dart';
 import 'package:project1/widgets/widgets.dart';
 
  int typeId = 0;
@@ -123,7 +124,28 @@ class APIServices {
 }
   
 
-   
+   Future<Submit> addResult(
+      int questionId,
+     String userEmail,
+    String userName,
+    String answer,
+    String latitude,
+    String longitude) async {
+    Dio dio = await launchDio();
+    Response response = await dio
+        .post('https://nysapi.yestechsl.com/swagger/ui/index#!/Questions/Questions_AddQuestionResults', data: {
+       "QuestionID": questionId,
+        "UserEmail": userEmail,
+        "UserName": userName,
+        "Answer": answer,
+        "Latitude": latitude,
+        "Longitude": longitude,
+    });
+    if (response.statusCode == 200) {
+      print('${response.data}');
+    }
+    
+  }
 
 Future<List<Question>> monthCommSer() async {
     Dio _dio = await launchDio();
@@ -137,16 +159,5 @@ Future<List<Question>> monthCommSer() async {
   }
 }
 
-// Future<EnumValues<QuestionType>> questType() async {
-//     Dio _dio = await launchDio();
-   
-//     Response response = await _dio
-//         .get('https://nysapi.yestechsl.com:443/api/questions/getbyquestiontype?QuestionType=${typeId}');
-//     if (response.statusCode == 200) {
-      
-//       Question quesType = Question.fromJson(response.data);
-//       return 
-      
-//   }
-// }
+
 }

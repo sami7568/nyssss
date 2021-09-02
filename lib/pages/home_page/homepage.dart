@@ -4,13 +4,16 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:project1/api/APIService.dart';
-
-
-
-
 import 'package:project1/pages/home_page/category.dart';
 
 class HomePage extends StatefulWidget {
+  final String email;
+  final String password;
+  const HomePage({
+    Key key,
+     this.email,
+     this.password,
+  }) : super(key: key);
 
   
   @override

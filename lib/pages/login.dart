@@ -5,6 +5,7 @@ import 'package:project1/model/login_model.dart';
 import 'package:project1/pages/home_page/homepage.dart';
 import 'package:project1/pages/signup/personal_info.dart';
 import 'package:project1/widgets/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -13,6 +14,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+    
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
 
@@ -138,7 +142,7 @@ String message = '';
                               });
                               var rsp = await apiService.loginUser(email, password);
                               print(rsp);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage() ));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(email: email,password: password)));
                               
                             
                            }
