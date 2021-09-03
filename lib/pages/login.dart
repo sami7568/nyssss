@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project1/ProgressHUD.dart';
+import 'package:project1/widgets/ProgressHUD.dart';
 import 'package:project1/api/APIService.dart';
 import 'package:project1/model/login_model.dart';
-import 'package:project1/pages/home_page/homepage.dart';
+import 'package:project1/pages/home_page/category.dart';
 import 'package:project1/pages/signup/personal_info.dart';
 import 'package:project1/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -140,21 +140,18 @@ String message = '';
                               setState(() {
                                 message = "please wait...";
                               });
-                              var rsp = await apiService.loginUser(email, password);
+                              var rsp = await apiService.loginUser(email.toString(), password.toString());
                               print(rsp);
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(email: email,password: password)));
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(email: email,password: password)));
                               
                             
-                           }
+                           
                             
-                          },
+                          
                             
-                            // if (validateAndSave()) {
-                            //   setState(() {
-                            //     isApiCallProcess = true;
-                            //   });
+                            
 
-                            //   apiService.loginUser(email,password).then((value) {
+                            //   apiService.loginUser(email.toString(),password.toString()).then((value) {
                             //     setState(() {
                             //       isApiCallProcess = false;
                             //     });
@@ -167,7 +164,7 @@ String message = '';
                             //             Navigator.push(
                             //     context,
                             //     MaterialPageRoute(
-                            //         builder: (context) => HomePage()));
+                            //         builder: (context) => HomePage(email: email,password: password)));
 
                             //       } else {
                             //         final snackBar =
@@ -177,7 +174,9 @@ String message = '';
                             //       }
                             //   });
                             //   print(requestModel.toJson());
-                            // }
+                            }
+                            
+                            },
                             
                           child: Container(
                             width: MediaQuery.of(context).size.width,

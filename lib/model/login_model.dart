@@ -8,7 +8,7 @@ class LoginRequestModel {
     LoginRequestModel({
         this.email,
         this.password,
-        this.fullName
+        // this.fullName
     });
 
     String email;
@@ -18,13 +18,13 @@ class LoginRequestModel {
     factory LoginRequestModel.fromJson(Map<String, dynamic> json) => LoginRequestModel(
         email: json["Email"],
         password: json["Password"],
-        fullName: json["FullName"]
+        // fullName: json["FullName"]
     );
 
     Map<String, dynamic> toJson() => {
         "Email": email,
         "Password": password,
-        "FullName":fullName
+        // "FullName":fullName
     };
 }
 

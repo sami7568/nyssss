@@ -18,7 +18,7 @@ class _RadPFGEState extends State<RadPFGE> {
   Widget build(BuildContext context) {
     return Container(
 
-      color: Colors.grey[300],
+      // color: Colors.grey[300],
       child: Column(
         
         mainAxisAlignment: MainAxisAlignment.start,
@@ -102,12 +102,13 @@ class _RadYNState extends State<RadYN> {
   Widget build(BuildContext context) {
     return Container(
 
-      color: Colors.grey[300],
+      // color: Colors.grey[200],
       child: Column(
         
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           ListTile(
+            
             title: Text("Yes"),
             leading: Radio(
               value: 1,

@@ -21,57 +21,14 @@ class MyDrawer extends StatelessWidget {
                 ),
               ),
             ),
-            ListTile(
-              leading: Icon(
-                CupertinoIcons.person_2,
-                color: Colors.grey,
-              ),
-              title: Text(
-                "New Group",
-                textScaleFactor: 1.2,
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
+            
             ListTile(
               leading: Icon(
                 CupertinoIcons.person,
                 color: Colors.grey,
               ),
               title: Text(
-                "Contacts",
-                textScaleFactor: 1.2,
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.call,
-                color: Colors.grey,
-              ),
-              title: Text(
-                "Calls",
-                textScaleFactor: 1.2,
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.person_pin_circle_sharp,
-                color: Colors.grey,
-              ),
-              title: Text(
-                "People Nearby",
-                textScaleFactor: 1.2,
-                style: TextStyle(color: Colors.black),
-              ),
-            ),
-            ListTile(
-              leading: Icon(
-                Icons.message,
-                color: Colors.grey,
-              ),
-              title: Text(
-                "Saved Messages",
+                "Profile",
                 textScaleFactor: 1.2,
                 style: TextStyle(color: Colors.black),
               ),

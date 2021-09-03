@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:project1/model/category_model.dart';
 import 'package:project1/model/login_model.dart';
-import 'package:project1/model/question1_model.dart';
+import 'package:project1/model/question_model.dart';
 
 import 'package:project1/model/signUp_model.dart';
 import 'package:project1/model/submit_model.dart';
@@ -104,13 +104,13 @@ class APIServices {
     Dio dio = await launchDio();
 
     Response response =
-        await dio.get('https://nysapi.yestechsl.com/api/users/getall');
+        await dio.post('https://nysapi.yestechsl.com/api/users/getall');
     if (response.statusCode == 200) {
       print('${response.data}');
     }
   }
 
-//  List<Datum> datum = [];
+
   Future<List<Datum>> fetchDatum() async {
     Dio _dio = await launchDio();
 
@@ -147,13 +147,14 @@ class APIServices {
     
   }
 
-Future<List<Question>> monthCommSer() async {
+Future<List<Question>> categories() async {
     Dio _dio = await launchDio();
    
     Response response = await _dio
         .get('https://nysapi.yestechsl.com:443/api/questions/getbycategory?Category=${typeId}');
     if (response.statusCode == 200) {
       CatType categorytype = CatType.fromJson(response.data);
+      
       return categorytype.data;
       
   }
