@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-
+import 'package:geolocator/geolocator.dart';
 import 'package:project1/api/APIService.dart';
 import 'package:project1/pages/home_page/drawer.dart';
 import 'package:project1/pages/home_page/questions.dart';
@@ -24,7 +24,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+// void locatePosition () async {
+//   Position position =await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+//   long = position.longitude;
+//   lat = position.latitude;
+//   print("Longitude and latitude");
+//   print(long);
+//   print(lat);
+// }
 
+// @override
+// void initState() { 
+//   locatePosition();
+//   super.initState();
+  
+// }
 
   @override
   Widget build(BuildContext context) {

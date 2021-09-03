@@ -92,6 +92,9 @@ class _RadPFGEState extends State<RadPFGE> {
 
 
 class RadYN extends StatefulWidget {
+String ans;
+RadYN({this.ans});
+
   @override
   _RadYNState createState() => _RadYNState();
 }
@@ -116,7 +119,10 @@ class _RadYNState extends State<RadYN> {
               onChanged: (value) {
                 setState(() {
                   val = value;
+                  widget.ans = val.toString();
+                  return "Yes";
                 });
+
                 print(val);
               },
               activeColor: Colors.black,
@@ -130,6 +136,8 @@ class _RadYNState extends State<RadYN> {
               onChanged: (value) {
                 setState(() {
                   val = value;
+                  widget.ans = val.toString();
+                  return "No";
                 });
                 print(val);
               },

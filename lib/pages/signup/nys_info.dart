@@ -11,6 +11,7 @@ class NYSInfo extends StatefulWidget {
     Key key,
 
     this.fullName,
+    this.userName,
     this.age,
     this.cNumber,
     this.email,
@@ -20,6 +21,7 @@ class NYSInfo extends StatefulWidget {
   }) : super(key: key);
 
 final String fullName;
+final String userName;
 final String email;
 final String cNumber;
 final String city;
@@ -231,6 +233,7 @@ void initState() {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => OthersInfo(fullName: widget.fullName,
+                                    userName: widget.userName,
                                     cNumber: widget.cNumber,
                                     age: widget.age,
                                     city: widget.city,

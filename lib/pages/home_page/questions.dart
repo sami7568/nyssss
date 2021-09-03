@@ -9,11 +9,15 @@ import 'package:project1/model/question_model.dart';
 import 'package:project1/model/submit_model.dart';
 import 'package:project1/pages/home_page/choice_page.dart';
 import 'package:project1/widgets/widgets.dart';
-
+import 'package:geolocator/geolocator.dart';
 import '../submit_page.dart';
 import 'drawer.dart';
 
 List<int> qId = [];
+var ques;
+double long;
+double lat;
+
 
 class Category extends StatefulWidget {
   final String email;
@@ -50,7 +54,6 @@ class _CategoryState extends State<Category> {
     qId.add(id);
     print(id);
   }
-
 
 
 
@@ -108,27 +111,33 @@ class _CategoryState extends State<Category> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      snapshot.data[index].questionType ==
+                                       ques =  snapshot.data[index].questionType ==
                                               QuestionType.YES_NO
                                           ? Column(
                                               children: [
-                                                RadYN(),
+                                                RadYN(
+                                                  
+                                                ),
                                               ],
                                             )
                                           : Column(
                                               children: [
-                                                snapshot.data[index]
+                                                ques = snapshot.data[index]
                                                             .questionType ==
                                                         QuestionType
                                                             .POOR_FAIR_GOOD_EXCELLENT
+                                                            
                                                     ? Column(
                                                         children: [
                                                           RadPFGE(),
                                                         ],
                                                       )
-                                                    : addTextFeild(),
+                                                    : ques = addTextFeild(),
+                                                  
+                                                 
                                               ],
                                             ),
+                                           
                                     ],
                                   );
                                 });
@@ -137,7 +146,7 @@ class _CategoryState extends State<Category> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      // Submit rspPersonal = await apiServices.addResult(questionId, widget.email, userName, answer, latitude, longitude)
+                      Submit rspPersonal = await apiServices.addResult(ques.toString(), widget.email,  );
 
                       Navigator.push(
                           context,

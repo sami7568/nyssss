@@ -54,6 +54,7 @@ class APIServices {
       String locationOfProject,
       String town,
       String description,
+      String userName,
       String periodInstitutionQualification,
       String institution,
       String qualification,
@@ -80,6 +81,7 @@ class APIServices {
       "localGovtArea": localGovtArea,
       "CommunityDevelopmentProject": communityDevelopmentProject,
       "Description": description,
+      "userName": userName,
       "LocationOfProject": locationOfProject,
       "Town": town,
       "District": district,
@@ -125,21 +127,20 @@ class APIServices {
   
 
    Future<Submit> addResult(
-      int questionId,
+
      String userEmail,
-    String userName,
+
     String answer,
-    String latitude,
-    String longitude) async {
+) async {
     Dio dio = await launchDio();
     Response response = await dio
         .post('https://nysapi.yestechsl.com/swagger/ui/index#!/Questions/Questions_AddQuestionResults', data: {
-       "QuestionID": questionId,
+      //  "QuestionID": questionId,
         "UserEmail": userEmail,
-        "UserName": userName,
+        // "UserName": userName,
         "Answer": answer,
-        "Latitude": latitude,
-        "Longitude": longitude,
+        // "Latitude": latitude,
+        // "Longitude": longitude,
     });
     if (response.statusCode == 200) {
       print('${response.data}');

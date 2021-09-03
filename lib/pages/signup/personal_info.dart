@@ -8,15 +8,15 @@ import 'nys_info.dart';
 import 'others_info.dart';
 
 class PersonalInfo extends StatefulWidget {
-  
   @override
   PersonalInfoState createState() => PersonalInfoState();
-  
-
 }
 
 class PersonalInfoState extends State<PersonalInfo> {
   TextEditingController fullNameController = new TextEditingController();
+
+  TextEditingController userNameController = new TextEditingController();
+
   TextEditingController contactNumController = new TextEditingController();
 
   TextEditingController emailController = new TextEditingController();
@@ -30,8 +30,6 @@ class PersonalInfoState extends State<PersonalInfo> {
   TextEditingController passwordController = new TextEditingController();
 
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -81,6 +79,18 @@ class PersonalInfoState extends State<PersonalInfo> {
                             filled: true,
                             fillColor: Colors.grey[300],
                             hintText: " Full Name",
+                            hintStyle: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        TextFormField(
+                          controller: userNameController,
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            filled: true,
+                            fillColor: Colors.grey[300],
+                            hintText: " User Name",
                             hintStyle: TextStyle(color: Colors.black54),
                           ),
                         ),
@@ -167,28 +177,29 @@ class PersonalInfoState extends State<PersonalInfo> {
                         SizedBox(height: 40),
                         GestureDetector(
                           onTap: () {
-                           
-                              String fullName = fullNameController.text;
+                            String fullName = fullNameController.text;
+                            var userName = userNameController.text;
+                            var email = emailController.text;
+                            var contactNo = contactNumController.text;
+                            var city = cityController.text;
+                            var country = countryController.text;
+                            var age = ageController.text;
+                            var password = passwordController.text;
 
-                              var email = emailController.text;
-                              var contactNo = contactNumController.text;
-                              var city = cityController.text;
-                              var country = countryController.text;
-                              var age = ageController.text;
-                              var password = passwordController.text;
-                            
-                        
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => NYSInfo(fullName: fullName,
-                                    cNumber: contactNo,
-                                    age: age,
-                                    city: city,
-                                    country: country,
-                                    password: password,
-                                    email: email, )));
-                          // }
+                                    builder: (context) => NYSInfo(
+                                          fullName: fullName,
+                                          userName: userName,
+                                          cNumber: contactNo,
+                                          age: age,
+                                          city: city,
+                                          country: country,
+                                          password: password,
+                                          email: email,
+                                        )));
+                            // }
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,

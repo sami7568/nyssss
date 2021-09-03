@@ -24,6 +24,7 @@ class SignupUser {
         this.localGovtArea,
         this.communityDevelopmentProject,
         this.description,
+        this.userName,
         this.locationOfProject,
         this.dateofRegistration,
         this.periodInstitutionQualification,
@@ -52,6 +53,7 @@ class SignupUser {
     String localGovtArea;
     String communityDevelopmentProject;
     String description;
+    String userName;
     String locationOfProject;
     String dateofRegistration;
     String periodInstitutionQualification;
@@ -80,6 +82,7 @@ class SignupUser {
         localGovtArea: json["LocalGovtArea"],
         communityDevelopmentProject: json["CommunityDevelopmentProject"],
         description: json["Description"],
+        userName: json["userName"],
         locationOfProject: json["LocationOfProject"],
         dateofRegistration: json["DateofRegistration"],
         periodInstitutionQualification: json["Period_Institution_Qualification"],
@@ -109,7 +112,7 @@ class SignupUser {
         "LocalGovtArea": localGovtArea,
         "CommunityDevelopmentProject": communityDevelopmentProject,
         "Description": description,
-
+"userName": userName,
         "LocationOfProject": locationOfProject,
         "DateofRegistration": dateofRegistration,
         "Period_Institution_Qualification": periodInstitutionQualification,

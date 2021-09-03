@@ -11,6 +11,7 @@ class OthersInfo extends StatefulWidget {
     Key key,
 
     this.fullName,
+    this.userName,
     this.age,
     this.cNumber,
     this.email,
@@ -30,6 +31,7 @@ class OthersInfo extends StatefulWidget {
   }) : super(key: key);
 
 final String fullName;
+final String userName;
 final String email;
 final String cNumber;
 final String city;
@@ -272,10 +274,10 @@ PersonalInfo personalInfo;
                       var periodCoveredByreport = periaodCovReportController.text;
                        var period = periodController.text;
                               
-                              SignupUser rspPersonal = await apiServices.registerPersonalUser( widget.fullName, widget.email, widget.cNumber, widget.city, widget.country, 
-                   widget.age, widget.password, widget.nysCall, widget.dateReg, widget.placePrim, widget.localGovt, widget.communDev, 
-                   widget.district, widget.locProj, widget.town, widget.description, periodInstitutionQualification, institution, qualification, areaofSpecialization, districtofOrigin, 
-                   employeerDuringPrimaryAssignment, communityofPrimaryAssignment, typeOfAssignment, periodCoveredByreport, period);
+                              SignupUser rspPersonal = await apiServices.registerPersonalUser( widget.fullName,widget.cNumber,widget.email,widget.userName, widget.country, widget.city,  
+                   widget.age, widget.password, widget.dateReg, areaofSpecialization, districtofOrigin, employeerDuringPrimaryAssignment, communityofPrimaryAssignment, typeOfAssignment, periodCoveredByreport, periodInstitutionQualification, widget.town, widget.district, widget.nysCall,  widget.placePrim, widget.localGovt, widget.communDev, 
+                    widget.locProj,  widget.description,  institution, qualification,   
+                       period);
                                   print(rspPersonal);
                           
                               
