@@ -1,17 +1,16 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import 'package:project1/api/APIService.dart';
 import 'package:project1/model/question_model.dart';
-import 'package:project1/model/submit_model.dart';
 import 'package:project1/pages/home_page/choice_page.dart';
 import 'package:project1/widgets/widgets.dart';
-import 'package:geolocator/geolocator.dart';
 import '../submit_page.dart';
 import 'drawer.dart';
+
+List<String> anslistData = [];
+
+String listData;
 
 List<int> qId = [];
 var ques;
@@ -37,6 +36,7 @@ class _CategoryState extends State<Category> {
   TextEditingController freeTextEditingController = new TextEditingController();
 
   List<DynamicWidget> listDynamic = [];
+
   List qId = [];
 
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
@@ -55,14 +55,25 @@ class _CategoryState extends State<Category> {
     print(id);
   }
 
-
-
+@override
+void initState() { 
+  print(anslistData);
+  super.initState();
+  
+}
 
 
   int val = -1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
+
+      ),
+      drawer: MyDrawer(),
       key: _scaffoldkey,
       body: Stack(
         children: [
@@ -146,7 +157,6 @@ class _CategoryState extends State<Category> {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      Submit rspPersonal = await apiServices.addResult(ques.toString(), widget.email,  );
 
                       Navigator.push(
                           context,
@@ -206,6 +216,7 @@ class _CategoryState extends State<Category> {
 
 int counter = 0;
 
+// ignore: must_be_immutable
 class DynamicWidget extends StatelessWidget {
   TextEditingController textEditingController = new TextEditingController();
   @override

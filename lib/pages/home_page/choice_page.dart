@@ -1,26 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project1/pages/home_page/questions.dart';
 
 class RadPFGE extends StatefulWidget {
-   
   const RadPFGE({
     Key key,
-    
   }) : super(key: key);
   @override
   _RadPFGEState createState() => _RadPFGEState();
 }
 
 class _RadPFGEState extends State<RadPFGE> {
-
   int val = -1;
   @override
   Widget build(BuildContext context) {
     return Container(
-
       // color: Colors.grey[300],
       child: Column(
-        
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           ListTile(
@@ -31,9 +27,9 @@ class _RadPFGEState extends State<RadPFGE> {
               onChanged: (value) {
                 setState(() {
                   val = value;
+                  //anslistData.add(val.toString());
                 });
                 pfge(val);
-                
               },
               activeColor: Colors.black,
             ),
@@ -46,6 +42,7 @@ class _RadPFGEState extends State<RadPFGE> {
               onChanged: (value) {
                 setState(() {
                   val = value;
+                  anslistData.add(val.toString());
                 });
                 pfge(val);
               },
@@ -60,6 +57,7 @@ class _RadPFGEState extends State<RadPFGE> {
               onChanged: (value) {
                 setState(() {
                   val = value;
+                  anslistData.add(val.toString());
                 });
                 pfge(val);
               },
@@ -74,6 +72,7 @@ class _RadPFGEState extends State<RadPFGE> {
               onChanged: (value) {
                 setState(() {
                   val = value;
+                  anslistData.add(val.toString());
                 });
                 pfge(val);
               },
@@ -84,16 +83,14 @@ class _RadPFGEState extends State<RadPFGE> {
       ),
     );
   }
-  void pfge(int value){
+
+  void pfge(int value) {
     print("poor dash dash data ");
     print(value);
   }
 }
 
-
 class RadYN extends StatefulWidget {
-String ans;
-RadYN({this.ans});
 
   @override
   _RadYNState createState() => _RadYNState();
@@ -104,14 +101,11 @@ class _RadYNState extends State<RadYN> {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       // color: Colors.grey[200],
       child: Column(
-        
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           ListTile(
-            
             title: Text("Yes"),
             leading: Radio(
               value: 1,
@@ -119,8 +113,7 @@ class _RadYNState extends State<RadYN> {
               onChanged: (value) {
                 setState(() {
                   val = value;
-                  widget.ans = val.toString();
-                  return "Yes";
+                  anslistData.add(val.toString());
                 });
 
                 print(val);
@@ -136,20 +129,19 @@ class _RadYNState extends State<RadYN> {
               onChanged: (value) {
                 setState(() {
                   val = value;
-                  widget.ans = val.toString();
-                  return "No";
+                  anslistData.add(val.toString());
                 });
                 print(val);
               },
               activeColor: Colors.black,
             ),
           ),
-          
         ],
       ),
     );
   }
-  void yn(int value){
+
+  void yn(int value) {
     print("poor dash dash data ");
     print(value);
   }

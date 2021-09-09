@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project1/api/APIService.dart';
-import 'package:project1/model/signUp_model.dart';
 import 'package:project1/widgets/widgets.dart';
 
 import 'others_info.dart';

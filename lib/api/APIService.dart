@@ -1,14 +1,16 @@
 
-import 'dart:convert';
+
+// ignore_for_file: unnecessary_brace_in_string_interps
 
 import 'package:dio/dio.dart';
 import 'package:project1/model/category_model.dart';
 import 'package:project1/model/login_model.dart';
+import 'package:project1/model/password_model.dart';
 import 'package:project1/model/question_model.dart';
 
 import 'package:project1/model/signUp_model.dart';
 import 'package:project1/model/submit_model.dart';
-import 'package:project1/widgets/widgets.dart';
+import 'package:project1/pages/update/verification.dart';
 
  int typeId = 0;
 
@@ -18,7 +20,7 @@ class APIServices {
   // String accessToken =
   //     "oDeWtZWM_QQcfsj5bcJotADwsojgrXpLq-fKt2te3mi6u7DOJwxF7hFVN7eNX_Pm7N9a-Z7YhaWZqnYcxtPClE05pW5AZcCWo9PM7IEyEslb1H-vHDfsNkWpXTNkdgL_G3ioF2Tq2ECoAQA39ciVueyledStIqWRe-bDb8uKUWcbofyyVtuA_gmub1EivLQ0pseMx7qvcCWG-2twgSrWU5RkHdlwy0wclRF7T_Wax23TC-Jgy4J60O10bkkiGXOwptwggX_ejjHVyh8gwpxMsj1KNJs3qwBG-nutLLkE_WaMdu9MKL67uOUdw5f2vDnI";
   Future<Dio> launchDio() async {
-    /// TODO: Settings for cache to be done here...
+    
     Dio dio = new Dio();
     dio.interceptors.add(LogInterceptor(responseBody: true, requestBody: true));
     // dio.interceptors.add(
@@ -37,7 +39,8 @@ class APIServices {
     return dio;
   }
 
-  Future<SignupUser> registerPersonalUser(
+  // ignore: missing_return
+  Future<SignupUser> registerUser(
       String fullName,
       String email,
       String contactNo,
@@ -45,26 +48,21 @@ class APIServices {
       String country,
       String age,
       String password,
+      String town,
+      String district,
       String nysCallUpNo,
-      String dateofRegistration,
       String placeofPrimaryAssignment,
       String localGovtArea,
       String communityDevelopmentProject,
-      String district,
-      String locationOfProject,
-      String town,
-      String description,
-      String userName,
-      String periodInstitutionQualification,
-      String institution,
-      String qualification,
-      String areaofSpecialization,
-      String districtofOrigin,
-      String employeerDuringPrimaryAssignment,
-      String communityofPrimaryAssignment,
-      String typeOfAssignment,
-      String periodCoveredByreport,
-      String period) async {
+    String locationOfProject,
+    String dateofRegistration,
+    String periodInstitutionQualification,
+    String areaofSpecialization,
+    String districtofOrigin,
+    String employeerDuringPrimaryAssignment,
+    String communityofPrimaryAssignment,
+    String typeOfAssignment,
+    String periodCoveredByreport) async {
     Dio dio = await launchDio();
     Response response = await dio
         .post('https://nysapi.yestechsl.com/api/users/register', data: {
@@ -76,25 +74,18 @@ class APIServices {
       "Age": age,
       "Password": password,
       "nysCallUpNo": nysCallUpNo,
-      "DateofRegistration": dateofRegistration,
       "PlaceofPrimaryAssignment": placeofPrimaryAssignment,
       "localGovtArea": localGovtArea,
       "CommunityDevelopmentProject": communityDevelopmentProject,
-      "Description": description,
-      "userName": userName,
-      "LocationOfProject": locationOfProject,
-      "Town": town,
-      "District": district,
-      "Period_Institution_Qualification": periodInstitutionQualification,
-      "Institution": institution,
-      "Qualification": qualification,
-      "AreaofSpecialization": areaofSpecialization,
-      "DistrictofOrigin": districtofOrigin,
-      "EmployeerDuringPrimaryAssignment": employeerDuringPrimaryAssignment,
-      "CommunityofPrimaryAssignment": communityofPrimaryAssignment,
-      "TypeOfAssignment": typeOfAssignment,
-      "PeriodCoveredByreport": periodCoveredByreport,
-      "Period": period,
+     "LocationOfProject": locationOfProject,
+        "DateofRegistration": dateofRegistration,
+        "Period_Institution_Qualification": periodInstitutionQualification,
+        "AreaofSpecialization": areaofSpecialization,
+        "DistrictofOrigin": districtofOrigin,
+        "EmployeerDuringPrimaryAssignment": employeerDuringPrimaryAssignment,
+        "CommunityofPrimaryAssignment": communityofPrimaryAssignment,
+        "TypeOfAssignment": typeOfAssignment,
+        "PeriodCoveredByreport": periodCoveredByreport,
     });
     if (response.statusCode == 200) {
       print('${response.data}');
@@ -102,17 +93,23 @@ class APIServices {
     
   }
 
+  // ignore: missing_return
   Future<LoginRequestModel> loginUser(String email, String password) async {
     Dio dio = await launchDio();
 
     Response response =
-        await dio.post('https://nysapi.yestechsl.com/api/users/getall');
+        await dio.post('https://nysapi.yestechsl.com:443/api/users/login?email=${email}&password=${password}', data: {
+          "Email": email,
+        "Password": password,
+        });
     if (response.statusCode == 200) {
-      print('${response.data}');
+      var category = response.data;
+      return category;
     }
   }
 
 
+  // ignore: missing_return
   Future<List<Datum>> fetchDatum() async {
     Dio _dio = await launchDio();
 
@@ -126,6 +123,7 @@ class APIServices {
 }
   
 
+   // ignore: missing_return
    Future<Submit> addResult(
 
      String userEmail,
@@ -148,6 +146,7 @@ class APIServices {
     
   }
 
+// ignore: missing_return
 Future<List<Question>> categories() async {
     Dio _dio = await launchDio();
    
@@ -162,4 +161,35 @@ Future<List<Question>> categories() async {
 }
 
 
+ // ignore: missing_return
+  Future<ChangePassword> changePassword(
+      String email,
+    String oldPassword,
+    String newPassword) async {
+    Dio dio = await launchDio();
+    Response response = await dio
+        .post('https://nysapi.yestechsl.com:443/api/users/changepassword', data: {
+     "Email": email,
+        "OldPassword": oldPassword,
+        "NewPassword": newPassword,
+    });
+    if (response.statusCode == 200) {
+      print('${response.data}');
+    }
+    
+  }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

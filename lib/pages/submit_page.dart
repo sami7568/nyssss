@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project1/pages/home_page/category.dart';
-import 'package:project1/pages/signup/others_info.dart';
-import 'package:project1/pages/signup/personal_info.dart';
 import 'package:project1/widgets/widgets.dart';
 
 class SubmitPage extends StatefulWidget {

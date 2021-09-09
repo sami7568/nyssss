@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:project1/pages/update/verification.dart';
 import 'package:project1/widgets/ProgressHUD.dart';
 import 'package:project1/api/APIService.dart';
 import 'package:project1/model/login_model.dart';
 import 'package:project1/pages/home_page/category.dart';
 import 'package:project1/pages/signup/personal_info.dart';
 import 'package:project1/widgets/widgets.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -28,7 +28,15 @@ class _LoginPageState extends State<LoginPage> {
  TextEditingController passwordTextEditingController = new TextEditingController();
 String message = '';
 
-
+void handleClick(String value) {
+    switch (value) {
+      case 'Change Password':
+      Navigator.of(context).push(MaterialPageRoute(builder: (context) => UpdatePassword()));
+        break;
+      case 'Settings':
+        break;
+    }
+}
   
 
   @override
@@ -40,17 +48,35 @@ String message = '';
     );
   }
 
-  @override
   Widget _uiSetup(BuildContext context) {
     return Stack(
       
       children: [
         BackgroundImage(),
         Scaffold(
+          appBar: AppBar(
+            
+            actions: <Widget>[
+              
+              
+          PopupMenuButton<String>(
+            
+            onSelected: handleClick,
+            itemBuilder: (BuildContext context) {
+              return {'Change Password', 'Settings'}.map((String choice) {
+                return PopupMenuItem<String>(
+                  value: choice,
+                  child: Text(choice),
+                );
+              }).toList();
+            },
+          ),
+        ],
+          backgroundColor: Colors.white,foregroundColor: Colors.black, elevation: 0,),
           key: scaffoldKey,
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 50, bottom: 30),
+            padding: EdgeInsets.only(top: 30, bottom: 30),
             child: Form(
               key: globalFormKey,
               child: Column(
@@ -88,7 +114,6 @@ String message = '';
                             Expanded(
                               child: TextFormField(
                                 controller: emailIdTextEditingController,
-                                // onSaved: (input) => widget.datum.emailId = input,
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -140,40 +165,38 @@ String message = '';
                               setState(() {
                                 message = "please wait...";
                               });
-                              var rsp = await apiService.loginUser(email.toString(), password.toString());
+                              LoginRequestModel rsp = await apiService.loginUser(email, password);
                               print(rsp);
-                              // Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(email: email,password: password)));
+
                               
-                            
-                           
-                            
-                          
-                            
-                            
+                             
 
-                            //   apiService.loginUser(email.toString(),password.toString()).then((value) {
-                            //     setState(() {
-                            //       isApiCallProcess = false;
-                            //     });
 
-                            //     if (value.email.isNotEmpty && value.password.isNotEmpty) {
-                            //         final snackBar = SnackBar(
-                            //             content: Text("Login Successful"));
-                            //         scaffoldKey.currentState
-                            //             .showSnackBar(snackBar);
-                            //             Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => HomePage(email: email,password: password)));
+                              // apiService.loginUser(email.toString(),password.toString()).then((value) {
+                              //   setState(() {
+                              //     isApiCallProcess = false;
+                              //   });
 
-                            //       } else {
-                            //         final snackBar =
-                            //             SnackBar(content: Text("Unsuccess"));
-                            //         scaffoldKey.currentState
-                            //             .showSnackBar(snackBar);
-                            //       }
-                            //   });
-                            //   print(requestModel.toJson());
+                                if (email.isNotEmpty && password.isNotEmpty) {
+                                    final snackBar = SnackBar(
+                                        content: Text("Login Successful"));
+                                    scaffoldKey.currentState
+                                        // ignore: deprecated_member_use
+                                        .showSnackBar(snackBar);
+                                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage(email: email,password: password)));
+
+                                  } else {
+                                    final snackBar =
+                                        SnackBar(content: Text("Unsuccess"));
+                                    scaffoldKey.currentState
+                                        // ignore: deprecated_member_use
+                                        .showSnackBar(snackBar);
+                                  }
+                              // });
+                              print(requestModel.toJson());
                             }
                             
                             },

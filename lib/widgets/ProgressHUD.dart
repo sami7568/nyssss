@@ -19,6 +19,7 @@ class ProgressHUD extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: deprecated_member_use
     List<Widget> widgetList = new List<Widget>();
     widgetList.add(child);
     if (inAsyncCall) {

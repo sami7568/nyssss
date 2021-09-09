@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:project1/api/APIService.dart';
 import 'package:project1/pages/home_page/drawer.dart';
 import 'package:project1/pages/home_page/questions.dart';
@@ -46,13 +45,16 @@ class _HomePageState extends State<HomePage> {
   
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       drawer: MyDrawer(),
       body: Stack(
         children: [
           BackgroundImage(),
           SafeArea(child: Padding(
-            padding: const EdgeInsets.only(top: 100),
+            padding: const EdgeInsets.only(top: 50),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               

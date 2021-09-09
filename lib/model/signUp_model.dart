@@ -1,12 +1,12 @@
 // To parse this JSON data, do
 //
-//     final SignupUser = SignupUserFromJson(jsonString);
+//     final category = categoryFromJson(jsonString);
 
 import 'dart:convert';
 
-SignupUser signupUserFromJson(String str) => SignupUser.fromJson(json.decode(str));
+SignupUser categoryFromJson(String str) => SignupUser.fromJson(json.decode(str));
 
-String signupUserToJson(SignupUser data) => json.encode(data.toJson());
+String categoryToJson(SignupUser data) => json.encode(data.toJson());
 
 class SignupUser {
     SignupUser({
@@ -23,8 +23,6 @@ class SignupUser {
         this.placeofPrimaryAssignment,
         this.localGovtArea,
         this.communityDevelopmentProject,
-        this.description,
-        this.userName,
         this.locationOfProject,
         this.dateofRegistration,
         this.periodInstitutionQualification,
@@ -34,9 +32,6 @@ class SignupUser {
         this.communityofPrimaryAssignment,
         this.typeOfAssignment,
         this.periodCoveredByreport,
-        this.period,
-        this.institution,
-        this.qualification,
     });
 
     String fullName;
@@ -52,8 +47,6 @@ class SignupUser {
     String placeofPrimaryAssignment;
     String localGovtArea;
     String communityDevelopmentProject;
-    String description;
-    String userName;
     String locationOfProject;
     String dateofRegistration;
     String periodInstitutionQualification;
@@ -63,9 +56,6 @@ class SignupUser {
     String communityofPrimaryAssignment;
     String typeOfAssignment;
     String periodCoveredByreport;
-    String period;
-    String institution;
-    String qualification;
 
     factory SignupUser.fromJson(Map<String, dynamic> json) => SignupUser(
         fullName: json["FullName"],
@@ -81,8 +71,6 @@ class SignupUser {
         placeofPrimaryAssignment: json["PlaceofPrimaryAssignment"],
         localGovtArea: json["LocalGovtArea"],
         communityDevelopmentProject: json["CommunityDevelopmentProject"],
-        description: json["Description"],
-        userName: json["userName"],
         locationOfProject: json["LocationOfProject"],
         dateofRegistration: json["DateofRegistration"],
         periodInstitutionQualification: json["Period_Institution_Qualification"],
@@ -92,9 +80,6 @@ class SignupUser {
         communityofPrimaryAssignment: json["CommunityofPrimaryAssignment"],
         typeOfAssignment: json["TypeOfAssignment"],
         periodCoveredByreport: json["PeriodCoveredByreport"],
-        period: json["Period"],
-        institution: json["Institution"],
-        qualification: json["Qualification"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -111,8 +96,6 @@ class SignupUser {
         "PlaceofPrimaryAssignment": placeofPrimaryAssignment,
         "LocalGovtArea": localGovtArea,
         "CommunityDevelopmentProject": communityDevelopmentProject,
-        "Description": description,
-"userName": userName,
         "LocationOfProject": locationOfProject,
         "DateofRegistration": dateofRegistration,
         "Period_Institution_Qualification": periodInstitutionQualification,
@@ -122,8 +105,5 @@ class SignupUser {
         "CommunityofPrimaryAssignment": communityofPrimaryAssignment,
         "TypeOfAssignment": typeOfAssignment,
         "PeriodCoveredByreport": periodCoveredByreport,
-        "Period": period,
-        "Institution": institution,
-        "Qualification": qualification,
     };
 }

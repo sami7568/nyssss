@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:project1/api/APIService.dart';
-import 'package:project1/model/signUp_model.dart';
+import 'package:project1/pages/update/verification.dart';
+
 import 'package:project1/widgets/widgets.dart';
 
 import 'nys_info.dart';
-// ignore: unused_import
 import 'others_info.dart';
 
 class PersonalInfo extends StatefulWidget {
+
+  
   @override
   PersonalInfoState createState() => PersonalInfoState();
 }
