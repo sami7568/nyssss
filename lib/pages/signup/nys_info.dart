@@ -10,7 +10,6 @@ class NYSInfo extends StatefulWidget {
     Key key,
 
     this.fullName,
-    this.userName,
     this.age,
     this.cNumber,
     this.email,
@@ -20,7 +19,6 @@ class NYSInfo extends StatefulWidget {
   }) : super(key: key);
 
 final String fullName;
-final String userName;
 final String email;
 final String cNumber;
 final String city;
@@ -106,6 +104,11 @@ void initState() {
                       children: [
                         TextFormField(
                           controller: nysNumController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -118,6 +121,11 @@ void initState() {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: dateRegController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -130,6 +138,11 @@ void initState() {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: placePrimController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -142,6 +155,11 @@ void initState() {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: localGovtController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -154,6 +172,11 @@ void initState() {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: commDevController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -166,6 +189,11 @@ void initState() {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: descController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -178,6 +206,11 @@ void initState() {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: locationProjController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -190,6 +223,11 @@ void initState() {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: townController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -202,6 +240,11 @@ void initState() {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: districtController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -214,7 +257,7 @@ void initState() {
                         SizedBox(height: 40),
                         GestureDetector(
                           onTap: () {
-                   
+                   if (globalFormKey.currentState.validate()) {
                                 var nysCall = nysNumController.text;
                   
                                 var dateReg = dateRegController.text;
@@ -232,7 +275,6 @@ void initState() {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => OthersInfo(fullName: widget.fullName,
-                                    userName: widget.userName,
                                     cNumber: widget.cNumber,
                                     age: widget.age,
                                     city: widget.city,
@@ -240,6 +282,7 @@ void initState() {
                                     password: widget.password,
                                     email: widget.email, nysCall: nysCall, dateReg: dateReg, placePrim: placePrim, localGovt: localGovt, communDev: communDev, district: district, locProj: locProj, town: town, description: description,)));
                           // }
+                   }
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,

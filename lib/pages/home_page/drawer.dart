@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project1/pages/home_page/profile_page.dart';
+import 'package:project1/pages/update/update_password.dart';
 
 class MyDrawer extends StatelessWidget {
   @override
@@ -22,26 +24,36 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
             
-            ListTile(
-              leading: Icon(
-                CupertinoIcons.person,
-                color: Colors.grey,
-              ),
-              title: Text(
-                "Profile",
-                textScaleFactor: 1.2,
-                style: TextStyle(color: Colors.black),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+              },
+              child: ListTile(
+                leading: Icon(
+                  CupertinoIcons.person,
+                  color: Colors.grey,
+                ),
+                title: Text(
+                  "Profile",
+                  textScaleFactor: 1.2,
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ),
-            ListTile(
-              leading: Icon(
-                Icons.settings,
-                color: Colors.grey,
-              ),
-              title: Text(
-                "Settings",
-                textScaleFactor: 1.2,
-                style: TextStyle(color: Colors.black),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatePassword()));
+              },
+              child: ListTile(
+                leading: Icon(
+                  Icons.settings,
+                  color: Colors.grey,
+                ),
+                title: Text(
+                  "Settings",
+                  textScaleFactor: 1.2,
+                  style: TextStyle(color: Colors.black),
+                ),
               ),
             ),
             Divider(

@@ -11,7 +11,6 @@ class OthersInfo extends StatefulWidget {
   const OthersInfo({
     Key key,
     this.fullName,
-    this.userName,
     this.age,
     this.cNumber,
     this.email,
@@ -30,7 +29,6 @@ class OthersInfo extends StatefulWidget {
   }) : super(key: key);
 
   final String fullName;
-  final String userName;
   final String email;
   final String cNumber;
   final String city;
@@ -135,6 +133,11 @@ class _OthersInfoState extends State<OthersInfo> {
                       children: [
                         TextFormField(
                           controller: periodInstQualController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -147,6 +150,11 @@ class _OthersInfoState extends State<OthersInfo> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: areaSpecController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -159,6 +167,11 @@ class _OthersInfoState extends State<OthersInfo> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: districtOrigController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -171,6 +184,11 @@ class _OthersInfoState extends State<OthersInfo> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: empPrimAssignController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -183,6 +201,11 @@ class _OthersInfoState extends State<OthersInfo> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: commPrimAssignController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -195,6 +218,11 @@ class _OthersInfoState extends State<OthersInfo> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: typeAssignController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -207,48 +235,17 @@ class _OthersInfoState extends State<OthersInfo> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: periaodCovReportController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             filled: true,
                             fillColor: Colors.grey[300],
                             hintText: " Period Covered By report",
-                            hintStyle: TextStyle(color: Colors.black54),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        TextFormField(
-                          controller: periodController,
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            filled: true,
-                            fillColor: Colors.grey[300],
-                            hintText: " Period",
-                            hintStyle: TextStyle(color: Colors.black54),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        TextFormField(
-                          controller: institutionController,
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            filled: true,
-                            fillColor: Colors.grey[300],
-                            hintText: " Institution",
-                            hintStyle: TextStyle(color: Colors.black54),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        TextFormField(
-                          controller: qualificationController,
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            filled: true,
-                            fillColor: Colors.grey[300],
-                            hintText: " Qualification",
                             hintStyle: TextStyle(color: Colors.black54),
                           ),
                         ),

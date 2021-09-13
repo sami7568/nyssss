@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:project1/pages/update/verification.dart';
 
 import 'package:project1/widgets/widgets.dart';
 
 import 'nys_info.dart';
-import 'others_info.dart';
 
 class PersonalInfo extends StatefulWidget {
 
@@ -15,8 +13,6 @@ class PersonalInfo extends StatefulWidget {
 
 class PersonalInfoState extends State<PersonalInfo> {
   TextEditingController fullNameController = new TextEditingController();
-
-  TextEditingController userNameController = new TextEditingController();
 
   TextEditingController contactNumController = new TextEditingController();
 
@@ -74,6 +70,11 @@ class PersonalInfoState extends State<PersonalInfo> {
                       children: [
                         TextFormField(
                           controller: fullNameController,
+                          validator: (String value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -84,20 +85,15 @@ class PersonalInfoState extends State<PersonalInfo> {
                           ),
                         ),
                         SizedBox(height: 20),
-                        TextFormField(
-                          controller: userNameController,
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            filled: true,
-                            fillColor: Colors.grey[300],
-                            hintText: " User Name",
-                            hintStyle: TextStyle(color: Colors.black54),
-                          ),
-                        ),
-                        SizedBox(height: 20),
+                        
                         TextFormField(
                           controller: contactNumController,
+                          validator: (String value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
+                          keyboardType: TextInputType.number,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -110,6 +106,13 @@ class PersonalInfoState extends State<PersonalInfo> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: emailController,
+                          validator: (val) {
+                                return RegExp(
+                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        .hasMatch(val)
+                                    ? null
+                                    : "Please enter correct email";
+                              },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -122,6 +125,11 @@ class PersonalInfoState extends State<PersonalInfo> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: cityController,
+                          validator: (String value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -134,6 +142,11 @@ class PersonalInfoState extends State<PersonalInfo> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: countryController,
+                          validator: (String value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -146,6 +159,12 @@ class PersonalInfoState extends State<PersonalInfo> {
                         SizedBox(height: 20),
                         TextFormField(
                           controller: ageController,
+                          validator: (String value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
+                          keyboardType: TextInputType.number,
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -156,16 +175,16 @@ class PersonalInfoState extends State<PersonalInfo> {
                           ),
                         ),
                         SizedBox(height: 10),
-                        Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [dob("dd"), dob("mm"), dob("Year")],
-                          ),
-                        ),
+                        
                         SizedBox(height: 20),
                         TextFormField(
+                          obscureText: true,
                           controller: passwordController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
                           style: TextStyle(color: Colors.black),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -178,8 +197,8 @@ class PersonalInfoState extends State<PersonalInfo> {
                         SizedBox(height: 40),
                         GestureDetector(
                           onTap: () {
+                            if (globalFormKey.currentState.validate()) {
                             String fullName = fullNameController.text;
-                            var userName = userNameController.text;
                             var email = emailController.text;
                             var contactNo = contactNumController.text;
                             var city = cityController.text;
@@ -192,7 +211,6 @@ class PersonalInfoState extends State<PersonalInfo> {
                                 MaterialPageRoute(
                                     builder: (context) => NYSInfo(
                                           fullName: fullName,
-                                          userName: userName,
                                           cNumber: contactNo,
                                           age: age,
                                           city: city,
@@ -201,6 +219,7 @@ class PersonalInfoState extends State<PersonalInfo> {
                                           email: email,
                                         )));
                             // }
+                            }
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width,

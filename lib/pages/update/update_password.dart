@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project1/api/APIService.dart';
-import 'package:project1/model/login_model.dart';
 import 'package:project1/model/password_model.dart';
 import 'package:project1/pages/login.dart';
-import 'package:project1/pages/signup/personal_info.dart';
 import 'package:project1/widgets/widgets.dart';
 
 class UpdatePassword extends StatefulWidget {

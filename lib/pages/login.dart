@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project1/pages/update/verification.dart';
 import 'package:project1/widgets/ProgressHUD.dart';
 import 'package:project1/api/APIService.dart';
 import 'package:project1/model/login_model.dart';
@@ -21,22 +20,22 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
 
   LoginRequestModel requestModel = new LoginRequestModel();
-  // LoginResponseModel responseModel = new LoginResponseModel();
+  // LoginData loginData = new LoginData();
   bool isApiCallProcess = false;
  APIServices apiService = new APIServices();
  TextEditingController emailIdTextEditingController = new TextEditingController();
  TextEditingController passwordTextEditingController = new TextEditingController();
 String message = '';
 
-void handleClick(String value) {
-    switch (value) {
-      case 'Change Password':
-      Navigator.of(context).push(MaterialPageRoute(builder: (context) => UpdatePassword()));
-        break;
-      case 'Settings':
-        break;
-    }
-}
+// void handleClick(String value) {
+//     switch (value) {
+//       case 'Change Password':
+//       Navigator.of(context).push(MaterialPageRoute(builder: (context) => UpdatePassword()));
+//         break;
+//       case 'Settings':
+//         break;
+//     }
+// }
   
 
   @override
@@ -54,29 +53,29 @@ void handleClick(String value) {
       children: [
         BackgroundImage(),
         Scaffold(
-          appBar: AppBar(
+        //   appBar: AppBar(
             
-            actions: <Widget>[
+        //     actions: <Widget>[
               
               
-          PopupMenuButton<String>(
+        //   PopupMenuButton<String>(
             
-            onSelected: handleClick,
-            itemBuilder: (BuildContext context) {
-              return {'Change Password', 'Settings'}.map((String choice) {
-                return PopupMenuItem<String>(
-                  value: choice,
-                  child: Text(choice),
-                );
-              }).toList();
-            },
-          ),
-        ],
-          backgroundColor: Colors.white,foregroundColor: Colors.black, elevation: 0,),
+        //     onSelected: handleClick,
+        //     itemBuilder: (BuildContext context) {
+        //       return {'Change Password', 'Settings'}.map((String choice) {
+        //         return PopupMenuItem<String>(
+        //           value: choice,
+        //           child: Text(choice),
+        //         );
+        //       }).toList();
+        //     },
+        //   ),
+        // ],
+        //   backgroundColor: Colors.white,foregroundColor: Colors.black, elevation: 0,),
           key: scaffoldKey,
           backgroundColor: Colors.transparent,
           body: SingleChildScrollView(
-            padding: EdgeInsets.only(top: 30, bottom: 30),
+            padding: EdgeInsets.only(top: 60, bottom: 30),
             child: Form(
               key: globalFormKey,
               child: Column(
@@ -114,6 +113,13 @@ void handleClick(String value) {
                             Expanded(
                               child: TextFormField(
                                 controller: emailIdTextEditingController,
+                                validator: (val) {
+                                return RegExp(
+                                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        .hasMatch(val)
+                                    ? null
+                                    : "Please enter correct email";
+                              },
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -142,8 +148,7 @@ void handleClick(String value) {
                             Expanded(
                               child: TextFormField(
                                 controller: passwordTextEditingController,
-                                // onSaved: (input) =>
-                                //     widget.datum.password = input,
+                                obscureText: true,
                                 style: TextStyle(color: Colors.black),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
@@ -165,8 +170,11 @@ void handleClick(String value) {
                               setState(() {
                                 message = "please wait...";
                               });
-                              LoginRequestModel rsp = await apiService.loginUser(email, password);
+                              LoginData rsp = await apiService.loginUser(email, password);
                               print(rsp);
+                              print("Deatails of profile and login");
+                              print(email);
+                              // print(loginData.status.toString());
 
                               
                              
@@ -177,7 +185,7 @@ void handleClick(String value) {
                               //     isApiCallProcess = false;
                               //   });
 
-                                if (email.isNotEmpty && password.isNotEmpty) {
+                                if (rsp.status == 200) {
                                     final snackBar = SnackBar(
                                         content: Text("Login Successful"));
                                     scaffoldKey.currentState

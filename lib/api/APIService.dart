@@ -10,7 +10,6 @@ import 'package:project1/model/question_model.dart';
 
 import 'package:project1/model/signUp_model.dart';
 import 'package:project1/model/submit_model.dart';
-import 'package:project1/pages/update/verification.dart';
 
  int typeId = 0;
 
@@ -94,17 +93,15 @@ class APIServices {
   }
 
   // ignore: missing_return
-  Future<LoginRequestModel> loginUser(String email, String password) async {
+  Future<LoginData> loginUser(String email, String password) async {
     Dio dio = await launchDio();
 
     Response response =
-        await dio.post('https://nysapi.yestechsl.com:443/api/users/login?email=${email}&password=${password}', data: {
-          "Email": email,
-        "Password": password,
-        });
+        await dio.get('https://nysapi.yestechsl.com:443/api/users/login?email=${email}&password=${password}');
     if (response.statusCode == 200) {
-      var category = response.data;
-      return category;
+      final body = response.data;
+      return LoginData(status: body['status'],);
+
     }
   }
 
@@ -121,6 +118,7 @@ class APIServices {
       
   }
 }
+
   
 
    // ignore: missing_return
