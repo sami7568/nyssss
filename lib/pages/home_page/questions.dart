@@ -18,19 +18,19 @@ double long;
 double lat;
 
 
-class Category extends StatefulWidget {
+class Questions extends StatefulWidget {
   final String email;
   final String password;
-  const Category({
+  const Questions({
     Key key,
     this.email,
     this.password,
   }) : super(key: key);
   @override
-  _CategoryState createState() => _CategoryState();
+  _QuestionsState createState() => _QuestionsState();
 }
 
-class _CategoryState extends State<Category> {
+class _QuestionsState extends State<Questions> {
   APIServices apiServices = new APIServices();
 
   TextEditingController freeTextEditingController = new TextEditingController();
@@ -41,19 +41,19 @@ class _CategoryState extends State<Category> {
 
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
-  // addDynamic() {
-  //   listDynamic.add(new DynamicWidget());
-  // }
+  addDynamic() {
+    listDynamic.add(new DynamicWidget());
+  }
 
-  // submitData() {
-  //   listDynamic.forEach((element) {
-  //   });
-  // }
+  submitData() {
+    listDynamic.forEach((element) {
+    });
+  }
 
-  // addquestionId(int id) {
-  //   qId.add(id);
-  //   print(id);
-  // }
+  addquestionId(int id) {
+    qId.add(id);
+    print(id);
+  }
 
 @override
 void initState() { 
@@ -101,7 +101,7 @@ void initState() {
                   ),
                   Expanded(
                     child: FutureBuilder(
-                        future: APIServices().categories(),
+                        future: APIServices().questions(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData) {
                             return Center(child: CircularProgressIndicator());
@@ -143,7 +143,7 @@ void initState() {
                                                           RadPFGE(),
                                                         ],
                                                       )
-                                                    : DynamicWidget(),
+                                                    : ques = addTextFeild(),
                                                   
                                                  
                                               ],
@@ -186,32 +186,32 @@ void initState() {
     );
   }
 
-  // Column radyn(int id) {
-  //   addquestionId(id);
-  //   return Column(
-  //     children: [
-  //       RadYN(),
-  //     ],
-  //   );
-  // }
+  Column radyn(int id) {
+    addquestionId(id);
+    return Column(
+      children: [
+        RadYN(),
+      ],
+    );
+  }
 
-  // Column radPfge(int id) {
-  //   addquestionId(id);
-  //   return Column(
-  //     children: [
-  //       RadPFGE(),
-  //     ],
-  //   );
-  // }
+  Column radPfge(int id) {
+    addquestionId(id);
+    return Column(
+      children: [
+        RadPFGE(),
+      ],
+    );
+  }
 
-  // Widget addTextFeild() {
-  //   addDynamic();
+  Widget addTextFeild() {
+    addDynamic();
 
-  //   //addquestionId(questionId);
+    //addquestionId(questionId);
 
-  //   print("textfeild is added");
-  //   return DynamicWidget();
-  // }
+    print("textfeild is added");
+    return DynamicWidget();
+  }
 }
 
 int counter = 0;

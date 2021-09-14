@@ -185,7 +185,7 @@ String message = '';
                               //     isApiCallProcess = false;
                               //   });
 
-                                if (rsp.status == 200) {
+                                if (rsp.message == "Succeed") {
                                     final snackBar = SnackBar(
                                         content: Text("Login Successful"));
                                     scaffoldKey.currentState
@@ -264,13 +264,5 @@ String message = '';
     );
   }
 
-  bool validateAndSave() {
-    final form = globalFormKey.currentState;
-    if (form.validate()) {
-      form.save();
-      return true;
-    }
-    return false;
-  }
 
  }

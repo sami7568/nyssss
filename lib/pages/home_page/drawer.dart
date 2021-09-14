@@ -4,6 +4,8 @@ import 'package:project1/pages/home_page/profile_page.dart';
 import 'package:project1/pages/update/update_password.dart';
 
 class MyDrawer extends StatelessWidget {
+  String email;
+  MyDrawer({this.email});
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -26,7 +28,7 @@ class MyDrawer extends StatelessWidget {
             
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ProfilePage(email: email,)));
               },
               child: ListTile(
                 leading: Icon(

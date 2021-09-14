@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:project1/api/APIService.dart';
+import 'package:project1/model/question_model.dart';
 import 'package:project1/pages/home_page/drawer.dart';
 import 'package:project1/pages/home_page/questions.dart';
 import 'package:project1/widgets/widgets.dart';
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
       ),
-      drawer: MyDrawer(),
+      drawer: MyDrawer(email: widget.email,),
       body: Stack(
         children: [
           BackgroundImage(),
@@ -73,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                 Expanded(
                       flex: 2,
                       child:  FutureBuilder(
-                      future: APIServices().fetchDatum(),
+                      future: APIServices().categories(),
                       builder: (
                         context, snapshot){
                           if(!snapshot.hasData){
@@ -91,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                                      
                                     
                                     
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => Category()));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => Questions()));
                                   },
                                   
                                   child: Column(

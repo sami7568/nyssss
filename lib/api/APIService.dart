@@ -100,14 +100,28 @@ class APIServices {
         await dio.get('https://nysapi.yestechsl.com:443/api/users/login?email=${email}&password=${password}');
     if (response.statusCode == 200) {
       final body = response.data;
-      return LoginData(status: body['status'],);
+      return LoginData(message: body['message'],);
 
     }
   }
 
 
+
   // ignore: missing_return
-  Future<List<Datum>> fetchDatum() async {
+  Future<List<LoginRequestModel>> profileData(String email) async {
+    Dio _dio = await launchDio();
+
+    Response response = await _dio
+        .get('https://nysapi.yestechsl.com:443/api/users/profile?Email=${email}');
+    if (response.statusCode == 200) {
+      LoginData profile = LoginData.fromJson(response.data);
+      return profile.data;
+      
+  }
+}
+
+  // ignore: missing_return
+  Future<List<Datum>> categories() async {
     Dio _dio = await launchDio();
 
     Response response = await _dio
@@ -145,7 +159,7 @@ class APIServices {
   }
 
 // ignore: missing_return
-Future<List<Question>> categories() async {
+Future<List<Question>> questions() async {
     Dio _dio = await launchDio();
    
     Response response = await _dio
