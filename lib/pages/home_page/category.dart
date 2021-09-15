@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                                      
                                     
                                     
-                                    Navigator.push(context, MaterialPageRoute(builder: (context) => Questions()));
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => Questions(email: widget.email,password: widget.password,)));
                                   },
                                   
                                   child: Column(

@@ -8,15 +8,7 @@ import 'package:project1/widgets/widgets.dart';
 import '../submit_page.dart';
 import 'drawer.dart';
 
-List<String> anslistData = [];
-
-String listData;
-
-List<int> qId = [];
 var ques;
-double long;
-double lat;
-
 
 class Questions extends StatefulWidget {
   final String email;
@@ -33,37 +25,19 @@ class Questions extends StatefulWidget {
 class _QuestionsState extends State<Questions> {
   APIServices apiServices = new APIServices();
 
-  TextEditingController freeTextEditingController = new TextEditingController();
-
-  List<DynamicWidget> listDynamic = [];
-
-  List qId = [];
-
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
-  addDynamic() {
-    listDynamic.add(new DynamicWidget());
+  Widget answertextfield(){
+    return TextFormField(
+        
+        decoration: InputDecoration(hintText: "Free Text"),
+        validator: (val) =>
+            val.length < 1 ? "Please answer the question" : null);
   }
 
-  submitData() {
-    listDynamic.forEach((element) {
-    });
-  }
-
-  addquestionId(int id) {
-    qId.add(id);
-    print(id);
-  }
-
-@override
-void initState() { 
-  print(anslistData);
-  super.initState();
-  
-}
+  AsyncSnapshot snapshot;
 
 
-  int val = -1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,7 +97,7 @@ void initState() {
                                         height: 10,
                                       ),
                                        ques =  snapshot.data[index].questionType ==
-                                              QuestionType.YES_NO
+                                              1
                                           ? Column(
                                               children: [
                                                 RadYN(
@@ -143,7 +117,7 @@ void initState() {
                                                           RadPFGE(),
                                                         ],
                                                       )
-                                                    : ques = addTextFeild(),
+                                                    : ques = answertextfield(),
                                                   
                                                  
                                               ],
@@ -157,6 +131,7 @@ void initState() {
                   ),
                   GestureDetector(
                     onTap: () async {
+                      
 
                       Navigator.push(
                           context,
@@ -186,45 +161,5 @@ void initState() {
     );
   }
 
-  Column radyn(int id) {
-    addquestionId(id);
-    return Column(
-      children: [
-        RadYN(),
-      ],
-    );
-  }
 
-  Column radPfge(int id) {
-    addquestionId(id);
-    return Column(
-      children: [
-        RadPFGE(),
-      ],
-    );
-  }
-
-  Widget addTextFeild() {
-    addDynamic();
-
-    //addquestionId(questionId);
-
-    print("textfeild is added");
-    return DynamicWidget();
-  }
-}
-
-int counter = 0;
-
-// ignore: must_be_immutable
-class DynamicWidget extends StatelessWidget {
-  TextEditingController textEditingController = new TextEditingController();
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-        controller: textEditingController,
-        decoration: InputDecoration(hintText: "Free Text"),
-        validator: (val) =>
-            val.length < 1 ? "Please answer the question" : null);
-  }
 }

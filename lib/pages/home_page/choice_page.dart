@@ -27,9 +27,9 @@ class _RadPFGEState extends State<RadPFGE> {
               onChanged: (value) {
                 setState(() {
                   val = value;
-                  //anslistData.add(val.toString());
+                  //
                 });
-                pfge(val);
+                
               },
               activeColor: Colors.black,
             ),
@@ -42,9 +42,9 @@ class _RadPFGEState extends State<RadPFGE> {
               onChanged: (value) {
                 setState(() {
                   val = value;
-                  anslistData.add(val.toString());
+                  
                 });
-                pfge(val);
+                
               },
               activeColor: Colors.black,
             ),
@@ -57,9 +57,9 @@ class _RadPFGEState extends State<RadPFGE> {
               onChanged: (value) {
                 setState(() {
                   val = value;
-                  anslistData.add(val.toString());
+                  
                 });
-                pfge(val);
+                
               },
               activeColor: Colors.black,
             ),
@@ -72,9 +72,9 @@ class _RadPFGEState extends State<RadPFGE> {
               onChanged: (value) {
                 setState(() {
                   val = value;
-                  anslistData.add(val.toString());
+                  
                 });
-                pfge(val);
+                
               },
               activeColor: Colors.black,
             ),
@@ -84,10 +84,7 @@ class _RadPFGEState extends State<RadPFGE> {
     );
   }
 
-  void pfge(int value) {
-    print("poor dash dash data ");
-    print(value);
-  }
+
 }
 
 class RadYN extends StatefulWidget {
@@ -113,10 +110,9 @@ class _RadYNState extends State<RadYN> {
               onChanged: (value) {
                 setState(() {
                   val = value;
-                  anslistData.add(val.toString());
+                  
                 });
 
-                print(val);
               },
               activeColor: Colors.black,
             ),
@@ -129,9 +125,8 @@ class _RadYNState extends State<RadYN> {
               onChanged: (value) {
                 setState(() {
                   val = value;
-                  anslistData.add(val.toString());
+                  
                 });
-                print(val);
               },
               activeColor: Colors.black,
             ),
@@ -141,8 +136,4 @@ class _RadYNState extends State<RadYN> {
     );
   }
 
-  void yn(int value) {
-    print("poor dash dash data ");
-    print(value);
-  }
 }

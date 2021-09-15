@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:project1/widgets/widgets.dart';
 
-class ProgressHUD extends StatelessWidget {
+class ProgressDialog extends StatelessWidget {
+  String message;
 
-  final Widget child;
-  final bool inAsyncCall;
-  final double opacity;
-  final Color color;
-  final Animation<Color> valueColor;
+  ProgressDialog({this.message});
 
-  ProgressHUD({
-    Key key,
-    @required this.child,
-    @required this.inAsyncCall,
-    this.opacity = 0.3,
-    this.color = Colors.grey,
-    this.valueColor,
-  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // ignore: deprecated_member_use
-    List<Widget> widgetList = new List<Widget>();
-    widgetList.add(child);
-    if (inAsyncCall) {
-      final modal = new Stack(
-        children: [
-          new Opacity(
-            opacity: opacity,
-            child: ModalBarrier(dismissible: false, color: color),
-          ),
-          new Center(
-            child: new CircularProgressIndicator()
-          ),
-        ],
-      );
-      widgetList.add(modal);
-    }
-    return Stack(
-      children: widgetList,
+    return Dialog(
+      
+      backgroundColor: blueColor(),
+      child: Container(
+        margin: EdgeInsets.all(15.0),
+        width: double.infinity,
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(6.0),
+        color: Colors.white),
+      child: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: Row(children: [
+          SizedBox(width: 6.0,),
+          CircularProgressIndicator(valueColor: AlwaysStoppedAnimation<Color>(Colors.black),),
+          SizedBox(width: 26.0,),
+          Text(message,style: TextStyle(color: Colors.black, fontSize: 15.0),)
+        ],),
+      ),
+      ),
+      
+      
     );
   }
+
+
+
+
+
 }

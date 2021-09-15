@@ -39,15 +39,8 @@ String message = '';
   
 
   @override
-  Widget build(BuildContext context) {
-    return ProgressHUD(
-      child: _uiSetup(context),
-      inAsyncCall: isApiCallProcess,
-      opacity: 0.3,
-    );
-  }
 
-  Widget _uiSetup(BuildContext context) {
+  Widget build(BuildContext context) {
     return Stack(
       
       children: [
@@ -164,26 +157,26 @@ String message = '';
                         SizedBox(height: 30),
                         GestureDetector(
                           onTap: () async {
+                            showDialog(
+                                   builder: (BuildContext context) { 
+                                     return ProgressDialog(message: "Authenticating, Please Wait",);
+                                    }, 
+                                    barrierDismissible: false,
+                                    context: context);
+                                    
+
+
                             if(globalFormKey.currentState.validate()){
                               var email = emailIdTextEditingController.text;
                               var password = passwordTextEditingController.text;
+                              
                               setState(() {
                                 message = "please wait...";
                               });
                               LoginData rsp = await apiService.loginUser(email, password);
-                              print(rsp);
-                              print("Deatails of profile and login");
-                              print(email);
-                              // print(loginData.status.toString());
-
+                               
+Navigator.pop(context);
                               
-                             
-
-
-                              // apiService.loginUser(email.toString(),password.toString()).then((value) {
-                              //   setState(() {
-                              //     isApiCallProcess = false;
-                              //   });
 
                                 if (rsp.message == "Succeed") {
                                     final snackBar = SnackBar(
@@ -195,6 +188,7 @@ String message = '';
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => HomePage(email: email,password: password)));
+                                   
 
                                   } else {
                                     final snackBar =
@@ -202,6 +196,8 @@ String message = '';
                                     scaffoldKey.currentState
                                         // ignore: deprecated_member_use
                                         .showSnackBar(snackBar);
+                                        // Navigator.pop(context);
+                                        
                                   }
                               // });
                               print(requestModel.toJson());
