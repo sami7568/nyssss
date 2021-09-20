@@ -11,7 +11,7 @@ class RadPFGE extends StatefulWidget {
 }
 
 class _RadPFGEState extends State<RadPFGE> {
-  int val = -1;
+  int val;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +27,6 @@ class _RadPFGEState extends State<RadPFGE> {
               onChanged: (value) {
                 setState(() {
                   val = value;
-                  //
                 });
                 
               },
@@ -42,7 +41,6 @@ class _RadPFGEState extends State<RadPFGE> {
               onChanged: (value) {
                 setState(() {
                   val = value;
-                  
                 });
                 
               },

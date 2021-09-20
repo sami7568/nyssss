@@ -11,6 +11,9 @@ import 'package:project1/model/question_model.dart';
 import 'package:project1/model/signUp_model.dart';
 import 'package:project1/model/submit_model.dart';
 
+import '../model/question_model.dart';
+import '../model/question_model.dart';
+List<Question> questionsdata;
  int typeId = 0;
 
 class APIServices {
@@ -159,19 +162,18 @@ class APIServices {
   }
 
 // ignore: missing_return
-Future<List<Question>> questions() async {
+ Future<List<Question>> questions() async {
     Dio _dio = await launchDio();
    
     Response response = await _dio
         .get('https://nysapi.yestechsl.com:443/api/questions/getbycategory?Category=${typeId}');
     if (response.statusCode == 200) {
       CatType categorytype = CatType.fromJson(response.data);
-      
+       questionsdata = categorytype.data;
       return categorytype.data;
       
   }
 }
-
 
  // ignore: missing_return
   Future<ChangePassword> changePassword(

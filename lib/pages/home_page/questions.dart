@@ -5,6 +5,14 @@ import 'package:project1/api/APIService.dart';
 import 'package:project1/model/question_model.dart';
 import 'package:project1/pages/home_page/choice_page.dart';
 import 'package:project1/widgets/widgets.dart';
+import '../../api/APIService.dart';
+import '../../api/APIService.dart';
+import '../../api/APIService.dart';
+import '../../api/APIService.dart';
+import '../../api/APIService.dart';
+import '../../model/question_model.dart';
+import '../../model/question_model.dart';
+import '../../model/question_model.dart';
 import '../submit_page.dart';
 import 'drawer.dart';
 
@@ -28,15 +36,41 @@ class _QuestionsState extends State<Questions> {
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
 
   Widget answertextfield(){
+    TextEditingController textEditingController= new TextEditingController();
     return TextFormField(
-        
+      controller: textEditingController,
         decoration: InputDecoration(hintText: "Free Text"),
         validator: (val) =>
             val.length < 1 ? "Please answer the question" : null);
   }
-
   AsyncSnapshot snapshot;
 
+
+  @override
+  void initState() {
+    getques();
+    super.initState();
+  }
+  List<Widget> listttt=[];
+
+  void getques()async{
+    await APIServices().questions();
+    print("this is the questions we get from api and save it in the list");
+    questionsdata.forEach((element) {print(element.questionId);});
+    print("this is the questions type");
+    await questionsdata.forEach((element) {
+      if(element.questionType==QuestionType.YES_NO){
+        listttt.add(RadYN());
+        print("yes/no addedd");
+      }else if(element.questionType==QuestionType.POOR_FAIR_GOOD_EXCELLENT){
+        listttt.add(RadPFGE());
+        print("poor_good is added");
+      }else if(element.questionType==QuestionType.FREE_TEXT){
+        listttt.add(answertextfield());
+        print("free text added");
+      }
+      print(element.questionType);});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,22 +107,16 @@ class _QuestionsState extends State<Questions> {
                   SizedBox(
                     height: 20,
                   ),
-                  Expanded(
-                    child: FutureBuilder(
-                        future: APIServices().questions(),
-                        builder: (context, snapshot) {
-                          if (!snapshot.hasData) {
-                            return Center(child: CircularProgressIndicator());
-                          } else {
-                            return ListView.builder(
-                                itemCount: snapshot.data.length,
+                  new Flexible(
+                    child: new ListView.builder(
+                                itemCount: questionsdata.length??"",
                                 itemBuilder: (context, index) {
                                   return Column(
                                     children: [
                                       SizedBox(
                                         height: 30,
                                       ),
-                                      Text(snapshot.data[index].questionText,
+                                      Text(questionsdata[index].questionText,
                                           style: TextStyle(
                                               fontSize: 17,
                                               color: Colors.black,
@@ -96,38 +124,18 @@ class _QuestionsState extends State<Questions> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                       ques =  snapshot.data[index].questionType ==
-                                              1
-                                          ? Column(
-                                              children: [
-                                                RadYN(
-                                                  
-                                                ),
-                                              ],
-                                            )
-                                          : Column(
-                                              children: [
-                                                ques = snapshot.data[index]
-                                                            .questionType ==
-                                                        QuestionType
-                                                            .POOR_FAIR_GOOD_EXCELLENT
-                                                            
-                                                    ? Column(
-                                                        children: [
-                                                          RadPFGE(),
-                                                        ],
-                                                      )
-                                                    : ques = answertextfield(),
-                                                  
-                                                 
-                                              ],
-                                            ),
-                                           
+                                      Column(
+                                        children: [
+                                          listttt.isEmpty
+                                              ? Center(child: CircularProgressIndicator())
+                                              : listttt[index]
+                                        ],
+                                      )
                                     ],
                                   );
-                                });
-                          }
-                        }),
+                                }
+
+                        ),
                   ),
                   GestureDetector(
                     onTap: () async {
