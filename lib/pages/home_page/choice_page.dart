@@ -1,17 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project1/pages/home_page/questions.dart';
 
 class RadPFGE extends StatefulWidget {
-  const RadPFGE({
-    Key key,
-  }) : super(key: key);
+ int val;
   @override
   _RadPFGEState createState() => _RadPFGEState();
 }
 
 class _RadPFGEState extends State<RadPFGE> {
-  int val;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,12 +19,11 @@ class _RadPFGEState extends State<RadPFGE> {
             title: Text("Poor"),
             leading: Radio(
               value: 1,
-              groupValue: val,
+              groupValue: widget.val,
               onChanged: (value) {
                 setState(() {
-                  val = value;
+                  widget.val = value;
                 });
-                
               },
               activeColor: Colors.black,
             ),
@@ -37,12 +32,11 @@ class _RadPFGEState extends State<RadPFGE> {
             title: Text("Fair"),
             leading: Radio(
               value: 2,
-              groupValue: val,
+              groupValue: widget.val,
               onChanged: (value) {
                 setState(() {
-                  val = value;
+                  widget.val = value;
                 });
-                
               },
               activeColor: Colors.black,
             ),
@@ -51,13 +45,11 @@ class _RadPFGEState extends State<RadPFGE> {
             title: Text("Good"),
             leading: Radio(
               value: 3,
-              groupValue: val,
+              groupValue: widget.val,
               onChanged: (value) {
                 setState(() {
-                  val = value;
-                  
+                  widget.val = value;
                 });
-                
               },
               activeColor: Colors.black,
             ),
@@ -66,13 +58,11 @@ class _RadPFGEState extends State<RadPFGE> {
             title: Text("Excellent"),
             leading: Radio(
               value: 4,
-              groupValue: val,
+              groupValue: widget.val,
               onChanged: (value) {
                 setState(() {
-                  val = value;
-                  
+                  widget.val = value;
                 });
-                
               },
               activeColor: Colors.black,
             ),
@@ -81,18 +71,17 @@ class _RadPFGEState extends State<RadPFGE> {
       ),
     );
   }
-
-
 }
 
-class RadYN extends StatefulWidget {
 
+
+class RadYN extends StatefulWidget {
+  int val;
   @override
   _RadYNState createState() => _RadYNState();
 }
 
 class _RadYNState extends State<RadYN> {
-  int val = -1;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -104,11 +93,11 @@ class _RadYNState extends State<RadYN> {
             title: Text("Yes"),
             leading: Radio(
               value: 1,
-              groupValue: val,
+              groupValue: widget.val,
               onChanged: (value) {
                 setState(() {
-                  val = value;
-                  
+                  widget.val = value;
+                  print(widget.val);
                 });
 
               },
@@ -119,11 +108,12 @@ class _RadYNState extends State<RadYN> {
             title: Text("No"),
             leading: Radio(
               value: 2,
-              groupValue: val,
+              groupValue: widget.val,
               onChanged: (value) {
                 setState(() {
-                  val = value;
-                  
+                  widget.val = value;
+                  print(widget.val);
+
                 });
               },
               activeColor: Colors.black,
@@ -135,3 +125,38 @@ class _RadYNState extends State<RadYN> {
   }
 
 }
+
+
+
+class Answertextfield extends StatefulWidget {
+  String data;
+  TextEditingController textEditingControllercontroller = new TextEditingController();
+
+  @override
+  _AnswertextfieldState createState() => _AnswertextfieldState();
+}
+
+class _AnswertextfieldState extends State<Answertextfield> {
+  @override
+  Widget build(BuildContext context) {
+     return TextFormField(
+         onChanged: (v){
+           setState(() {
+             widget.data= v;
+           });
+           //print(widget.data);
+         },
+         onFieldSubmitted: (text){
+           print(text);
+           print("text is submitted ");
+         },
+          controller: widget.textEditingControllercontroller,
+          decoration: InputDecoration(hintText: "Free Text")
+     );
+    }
+/*
+  void setTextdata(String data){
+    this.data = data;
+  }*/
+}
+

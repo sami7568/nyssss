@@ -6,14 +6,8 @@ import 'package:project1/model/question_model.dart';
 import 'package:project1/pages/home_page/choice_page.dart';
 import 'package:project1/widgets/widgets.dart';
 import '../../api/APIService.dart';
-import '../../api/APIService.dart';
-import '../../api/APIService.dart';
-import '../../api/APIService.dart';
-import '../../api/APIService.dart';
 import '../../model/question_model.dart';
-import '../../model/question_model.dart';
-import '../../model/question_model.dart';
-import '../submit_page.dart';
+import 'choice_page.dart';
 import 'drawer.dart';
 
 var ques;
@@ -34,39 +28,65 @@ class _QuestionsState extends State<Questions> {
   APIServices apiServices = new APIServices();
 
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
+  List<Widget> listttt=[];
+  List answerDataList =[];
+  List finalAnswers =[];
 
-  Widget answertextfield(){
-    TextEditingController textEditingController= new TextEditingController();
-    return TextFormField(
-      controller: textEditingController,
-        decoration: InputDecoration(hintText: "Free Text"),
-        validator: (val) =>
-            val.length < 1 ? "Please answer the question" : null);
-  }
+  List<Answertextfield> textlist =[];
+  List<Answertextfield> answerlist = [];
+
+  List<RadPFGE> pfgelist = [];
+  List<RadPFGE> poorlist =[];
+
+  List<RadYN> ynlist =[];
+  List<RadYN> yeslist =[];
+
   AsyncSnapshot snapshot;
-
-
   @override
   void initState() {
     getques();
     super.initState();
   }
-  List<Widget> listttt=[];
+int index =-1;
+  List textFeildindexlist =[];
+  List radioIndexList =[];
+  List poorIndexList =[];
 
-  void getques()async{
+  Future getques()async{
     await APIServices().questions();
     print("this is the questions we get from api and save it in the list");
     questionsdata.forEach((element) {print(element.questionId);});
     print("this is the questions type");
     await questionsdata.forEach((element) {
       if(element.questionType==QuestionType.YES_NO){
-        listttt.add(RadYN());
+        setState(() {
+          index = index+1;
+        });
+        radioIndexList.add(index);
+        listttt.add(new RadYN());
+        ynlist.add(new RadYN());
         print("yes/no addedd");
-      }else if(element.questionType==QuestionType.POOR_FAIR_GOOD_EXCELLENT){
-        listttt.add(RadPFGE());
+      }
+      else if(element.questionType==QuestionType.POOR_FAIR_GOOD_EXCELLENT){
+        setState(() {
+          index = index+1;
+        });
+        poorIndexList.add(index);
+        listttt.add(new RadPFGE());
+        pfgelist.add(new RadPFGE());
         print("poor_good is added");
-      }else if(element.questionType==QuestionType.FREE_TEXT){
-        listttt.add(answertextfield());
+      }
+      else if(element.questionType==QuestionType.FREE_TEXT){
+        setState(() {
+          index = index+1;
+        });
+        textFeildindexlist.add(index);
+        print(index);
+        listttt.add(new Answertextfield());
+        setState(() {
+          textlist.add(new Answertextfield());
+        });
+
         print("free text added");
       }
       print(element.questionType);});
@@ -79,11 +99,12 @@ class _QuestionsState extends State<Questions> {
         backgroundColor: Colors.white,
         elevation: 0,
         iconTheme: IconThemeData(color: Colors.black),
-
       ),
       drawer: MyDrawer(),
       key: _scaffoldkey,
-      body: Stack(
+      body: listttt.length==0
+          ? Center(child: CircularProgressIndicator())
+          : Stack(
         children: [
           BackgroundImage(),
           SafeArea(
@@ -109,7 +130,7 @@ class _QuestionsState extends State<Questions> {
                   ),
                   new Flexible(
                     child: new ListView.builder(
-                                itemCount: questionsdata.length??"",
+                                itemCount: questionsdata.length??questionsdata.length,
                                 itemBuilder: (context, index) {
                                   return Column(
                                     children: [
@@ -127,24 +148,79 @@ class _QuestionsState extends State<Questions> {
                                       Column(
                                         children: [
                                           listttt.isEmpty
-                                              ? Center(child: CircularProgressIndicator())
+                                              ? Center(
+                                                child: CircularProgressIndicator())
                                               : listttt[index]
                                         ],
-                                      )
+                                      ),
                                     ],
                                   );
                                 }
-
                         ),
                   ),
                   GestureDetector(
                     onTap: () async {
-                      
 
+                      print("these are textfeild indexes ");
+                      //assigning textfield list
+                      textFeildindexlist.forEach((element) {
+                        answerlist.add(listttt[element]);
+                      });
+
+                      //adding answer of textfeild
+                      answerlist.forEach((element) {
+                        answerDataList.add(element.textEditingControllercontroller.text);
+                      });
+
+                      //assigning radio feild
+                      radioIndexList.forEach((element) {
+                        ynlist.add(listttt[element]);
+                      });
+                      //adding answer of yes no
+
+                      ynlist.forEach((element) {
+                        int vale=element.val;
+                        if(vale==1){
+                          answerDataList.add("yes");
+                        }
+                        else if(vale==2) {
+                          answerDataList.add("no");
+                        }
+                        print(element.val);
+                      });
+
+                      //assigning poor list
+                      poorIndexList.forEach((element) {
+                        poorlist.add(listttt[element]);
+                      });
+                      //adding poor answers to list
+                      poorlist.forEach((element) {
+                        if(element.val==1){
+                          answerDataList.add("poor");
+                        }
+                        else if(element.val==2) {
+                          answerDataList.add("fair");
+                        }
+                        else if(element.val==3){
+                          answerDataList.add("good");
+                        }
+                        else if(element.val==4){
+                          answerDataList.add("excellent");
+                        }
+                        //print(element.val);
+                      });
+
+                      print("data of answers ");
+                      answerDataList.forEach((element) {
+                        print(element);
+                      });
+
+
+/*
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SubmitPage()));
+                              builder: (context) => SubmitPage()));*/
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
@@ -168,6 +244,4 @@ class _QuestionsState extends State<Questions> {
       ),
     );
   }
-
-
 }
