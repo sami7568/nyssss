@@ -27,10 +27,12 @@ class Questions extends StatefulWidget {
 class _QuestionsState extends State<Questions> {
   APIServices apiServices = new APIServices();
 
+  Map<int, String> answerMap = new Map();
+
   final GlobalKey<ScaffoldState> _scaffoldkey = new GlobalKey<ScaffoldState>();
   List<Widget> listttt=[];
-  List answerDataList =[];
-  List finalAnswers =[];
+  List answerDataList= [];
+  List finalAnswer =[];
 
   List<Answertextfield> textlist =[];
   List<Answertextfield> answerlist = [];
@@ -47,11 +49,14 @@ class _QuestionsState extends State<Questions> {
     getques();
     super.initState();
   }
-int index =-1;
+  int index =-1;
   List textFeildindexlist =[];
   List radioIndexList =[];
   List poorIndexList =[];
-
+  List questionIdtext = [];
+  List questionIdYesno = [];
+  List questionIsPoor = [];
+  List finalQuestionId = [];
   Future getques()async{
     await APIServices().questions();
     print("this is the questions we get from api and save it in the list");
@@ -65,6 +70,7 @@ int index =-1;
         radioIndexList.add(index);
         listttt.add(new RadYN());
         ynlist.add(new RadYN());
+        questionIdYesno.add(element.questionId);
         print("yes/no addedd");
       }
       else if(element.questionType==QuestionType.POOR_FAIR_GOOD_EXCELLENT){
@@ -74,6 +80,7 @@ int index =-1;
         poorIndexList.add(index);
         listttt.add(new RadPFGE());
         pfgelist.add(new RadPFGE());
+        questionIsPoor.add(element.questionId);
         print("poor_good is added");
       }
       else if(element.questionType==QuestionType.FREE_TEXT){
@@ -86,7 +93,7 @@ int index =-1;
         setState(() {
           textlist.add(new Answertextfield());
         });
-
+        questionIdtext.add(element.questionId);
         print("free text added");
       }
       print(element.questionType);});
@@ -186,7 +193,6 @@ int index =-1;
                         else if(vale==2) {
                           answerDataList.add("no");
                         }
-                        print(element.val);
                       });
 
                       //assigning poor list
@@ -207,15 +213,39 @@ int index =-1;
                         else if(element.val==4){
                           answerDataList.add("excellent");
                         }
-                        //print(element.val);
                       });
 
-                      print("data of answers ");
                       answerDataList.forEach((element) {
-                        print(element);
+                        finalAnswer.add(element);
                       });
 
+                      questionIdtext.forEach((element) {
+                        finalQuestionId.add(element);
+                      });
+                      questionIdYesno.forEach((element) {
+                        //print(element);
+                        finalQuestionId.add(element);
+                      });
+                      questionIsPoor.forEach((element) {
+                        finalQuestionId.add(element);
+                      });
+                      print("data of answers ");
 
+                      finalAnswer.forEach((element) {
+                       // print(element);
+                      });
+                      print("question ids ");
+                      finalQuestionId.forEach((element) {
+                        //print(element);
+                      });
+
+                   /*   for(var i =0; i< finalQuestionId.length ;i ++){
+                        answerMap[finalQuestionId[i]] = finalAnswer[i];
+                      }
+*/
+
+                      //finalQuestionId list is questionid list
+                      //finalAnswer list is answer list
 /*
                       Navigator.push(
                           context,

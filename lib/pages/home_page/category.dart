@@ -7,6 +7,7 @@ import 'package:project1/model/question_model.dart';
 import 'package:project1/pages/home_page/drawer.dart';
 import 'package:project1/pages/home_page/questions.dart';
 import 'package:project1/widgets/widgets.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {
   final String email;
@@ -21,24 +22,24 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
-
+var long, lat;
 class _HomePageState extends State<HomePage> {
 
-// void locatePosition () async {
-//   Position position =await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
-//   long = position.longitude;
-//   lat = position.latitude;
-//   print("Longitude and latitude");
-//   print(long);
-//   print(lat);
-// }
+ void locatePosition () async {
+   Position position =await Geolocator.getCurrentPosition(desiredAccuracy: LocationAccuracy.best);
+    long = position.longitude;
+    lat = position.latitude;
+   print("Longitude and latitude");
+   print(long);
+   print(lat);
+ }
 
-// @override
-// void initState() { 
-//   locatePosition();
-//   super.initState();
+ @override
+ void initState() {
+   locatePosition();
+   super.initState();
   
-// }
+ }
 
   @override
   Widget build(BuildContext context) {

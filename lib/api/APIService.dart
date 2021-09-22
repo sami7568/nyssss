@@ -10,8 +10,8 @@ import 'package:project1/model/question_model.dart';
 
 import 'package:project1/model/signUp_model.dart';
 import 'package:project1/model/submit_model.dart';
+import 'package:project1/pages/home_page/category.dart';
 
-import '../model/question_model.dart';
 import '../model/question_model.dart';
 List<Question> questionsdata;
  int typeId = 0;
@@ -146,12 +146,12 @@ class APIServices {
     Dio dio = await launchDio();
     Response response = await dio
         .post('https://nysapi.yestechsl.com/swagger/ui/index#!/Questions/Questions_AddQuestionResults', data: {
-      //  "QuestionID": questionId,
+        //"QuestionID": questionId,
         "UserEmail": userEmail,
         // "UserName": userName,
-        "Answer": answer,
-        // "Latitude": latitude,
-        // "Longitude": longitude,
+         "Answer": answer,
+         "Latitude": lat,
+         "Longitude": long,
     });
     if (response.statusCode == 200) {
       print('${response.data}');
