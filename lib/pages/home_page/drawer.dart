@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:project1/pages/home_page/category.dart';
 import 'package:project1/pages/home_page/profile_page.dart';
+import 'package:project1/pages/login.dart';
 import 'package:project1/pages/update/update_password.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -22,6 +24,22 @@ class MyDrawer extends StatelessWidget {
                 accountName: Text("National Youth Service"),
                 currentAccountPicture: CircleAvatar(
                   backgroundImage: AssetImage("assets/nys-logo.jpeg"),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+              },
+              child: ListTile(
+                leading: Icon(
+                  CupertinoIcons.home,
+                  color: Colors.grey,
+                ),
+                title: Text(
+                  "Home",
+                  textScaleFactor: 1.2,
+                  style: TextStyle(color: Colors.black),
                 ),
               ),
             ),
@@ -53,6 +71,22 @@ class MyDrawer extends StatelessWidget {
                 ),
                 title: Text(
                   "Settings",
+                  textScaleFactor: 1.2,
+                  style: TextStyle(color: Colors.black),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => LoginPage()));
+              },
+              child: ListTile(
+                leading: Icon(
+                  Icons.logout,
+                  color: Colors.grey,
+                ),
+                title: Text(
+                  "Logout",
                   textScaleFactor: 1.2,
                   style: TextStyle(color: Colors.black),
                 ),

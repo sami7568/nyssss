@@ -4,6 +4,7 @@
 
 import 'dart:convert';
 
+
 Submit categoryFromJson(String str) => Submit.fromJson(json.decode(str));
 
 String categoryToJson(Submit data) => json.encode(data.toJson());
@@ -12,7 +13,7 @@ class Submit {
     Submit({
         this.questionId,
         this.userEmail,
-        this.fullName,
+        this.userName,
         this.answer,
         this.latitude,
         this.longitude,
@@ -20,7 +21,7 @@ class Submit {
 
     int questionId;
     String userEmail;
-    String fullName;
+    String userName;
     String answer;
     String latitude;
     String longitude;
@@ -28,7 +29,7 @@ class Submit {
     factory Submit.fromJson(Map<String, dynamic> json) => Submit(
         questionId: json["QuestionID"],
         userEmail: json["UserEmail"],
-        fullName: json["FullName"],
+        userName: json["UserName"],
         answer: json["Answer"],
         latitude: json["Latitude"],
         longitude: json["Longitude"],
@@ -37,9 +38,26 @@ class Submit {
     Map<String, dynamic> toJson() => {
         "QuestionID": questionId,
         "UserEmail": userEmail,
-        "FullName": fullName,
+        "UserName": userName,
         "Answer": answer,
         "Latitude": latitude,
         "Longitude": longitude,
+    };
+}
+
+
+class ListSubmit {
+    List<Submit> resultData;
+
+    ListSubmit({this.resultData});
+
+    factory ListSubmit.fromJson(Map<String, dynamic> json) => ListSubmit(
+
+        resultData: List<Submit>.from(json["data"].map((x) => Submit.fromJson(x))),
+    );
+
+    Map<String, dynamic> toJson() => {
+
+        "resultData": List<dynamic>.from(resultData.map((x) => x.toJson())),
     };
 }

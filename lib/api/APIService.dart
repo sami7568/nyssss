@@ -140,18 +140,22 @@ class APIServices {
 
    // ignore: missing_return
    Future<Submit> addResult(
-       String userEmail,
-       String answer,
+  List<dynamic> questionId,
+  String userEmail,
+  String userName,
+  List<dynamic> answer,
+  String latitude,
+  String longitude,
 ) async {
     Dio dio = await launchDio();
     Response response = await dio
-        .post('https://nysapi.yestechsl.com/swagger/ui/index#!/Questions/Questions_AddQuestionResults', data: {
-        //"QuestionID": questionId,
-        "UserEmail": userEmail,
-        // "UserName": userName,
-         "Answer": answer,
-         "Latitude": lat,
-         "Longitude": long,
+        .post('https://nysapi.yestechsl.com:443/api/questions/addresults', data: {
+      "QuestionID": questionId,
+      "UserEmail": userEmail,
+  "UserName": userName,
+      "Answer": answer,
+      "Latitude": latitude,
+      "Longitude": longitude,
     });
     if (response.statusCode == 200) {
       print('${response.data}');

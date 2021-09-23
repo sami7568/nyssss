@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RadPFGE extends StatefulWidget {
- int val;
+ int val=0;
   @override
   _RadPFGEState createState() => _RadPFGEState();
 }
@@ -76,7 +76,7 @@ class _RadPFGEState extends State<RadPFGE> {
 
 
 class RadYN extends StatefulWidget {
-  int val;
+  int val=0;
   @override
   _RadYNState createState() => _RadYNState();
 }

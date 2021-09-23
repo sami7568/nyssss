@@ -3,7 +3,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:project1/api/APIService.dart';
 import 'package:project1/model/question_model.dart';
+import 'package:project1/model/submit_model.dart';
+import 'package:project1/pages/home_page/category.dart';
 import 'package:project1/pages/home_page/choice_page.dart';
+import 'package:project1/pages/submit_page.dart';
 import 'package:project1/widgets/widgets.dart';
 import '../../api/APIService.dart';
 import '../../model/question_model.dart';
@@ -15,6 +18,7 @@ var ques;
 class Questions extends StatefulWidget {
   final String email;
   final String password;
+
   const Questions({
     Key key,
     this.email,
@@ -25,6 +29,13 @@ class Questions extends StatefulWidget {
 }
 
 class _QuestionsState extends State<Questions> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  String userName = "new";
+  int qID = 1;
+  String qAns = "ans";
+
+  ListSubmit listSubmit = ListSubmit();
+
   APIServices apiServices = new APIServices();
 
   Map<int, String> answerMap = new Map();
@@ -48,6 +59,7 @@ class _QuestionsState extends State<Questions> {
   void initState() {
     getques();
     super.initState();
+    listSubmit.resultData = List<Submit>();
   }
   int index =-1;
   List textFeildindexlist =[];
@@ -108,7 +120,7 @@ class _QuestionsState extends State<Questions> {
         iconTheme: IconThemeData(color: Colors.black),
       ),
       drawer: MyDrawer(),
-      key: _scaffoldkey,
+      key: scaffoldKey,
       body: listttt.length==0
           ? Center(child: CircularProgressIndicator())
           : Stack(
@@ -120,13 +132,9 @@ class _QuestionsState extends State<Questions> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    "assets/nys-logo.jpeg",
-                    height: 180,
-                  ),
-                  SizedBox(height: 30),
+
                   Text(
-                    "Home",
+                    "Questions",
                     style: TextStyle(
                         color: Color(0xff1330fa),
                         fontSize: 20,
@@ -176,6 +184,15 @@ class _QuestionsState extends State<Questions> {
 
                       //adding answer of textfeild
                       answerlist.forEach((element) {
+                        if(element.textEditingControllercontroller.text.isEmpty) {
+                          //
+                          final snackBar =
+                          SnackBar(content: Text("Unsuccess"));
+                          scaffoldKey.currentState
+                          // ignore: deprecated_member_use
+                              .showSnackBar(snackBar);
+                          return;
+                        }
                         answerDataList.add(element.textEditingControllercontroller.text);
                       });
 
@@ -192,6 +209,14 @@ class _QuestionsState extends State<Questions> {
                         }
                         else if(vale==2) {
                           answerDataList.add("no");
+                        }else{
+                          //
+                          final snackBar =
+                          SnackBar(content: Text("Unsuccess"));
+                          scaffoldKey.currentState
+                          // ignore: deprecated_member_use
+                              .showSnackBar(snackBar);
+                          return;
                         }
                       });
 
@@ -213,6 +238,15 @@ class _QuestionsState extends State<Questions> {
                         else if(element.val==4){
                           answerDataList.add("excellent");
                         }
+                        else{
+                          //
+                          final snackBar =
+                          SnackBar(content: Text("Unsuccess"));
+                          scaffoldKey.currentState
+                          // ignore: deprecated_member_use
+                              .showSnackBar(snackBar);
+                          return;
+                        }
                       });
 
                       answerDataList.forEach((element) {
@@ -229,28 +263,23 @@ class _QuestionsState extends State<Questions> {
                       questionIsPoor.forEach((element) {
                         finalQuestionId.add(element);
                       });
-                      print("data of answers ");
 
-                      finalAnswer.forEach((element) {
-                       // print(element);
-                      });
-                      print("question ids ");
-                      finalQuestionId.forEach((element) {
-                        //print(element);
-                      });
-
-                   /*   for(var i =0; i< finalQuestionId.length ;i ++){
-                        answerMap[finalQuestionId[i]] = finalAnswer[i];
-                      }
-*/
 
                       //finalQuestionId list is questionid list
                       //finalAnswer list is answer list
-/*
+                      for( int i = 0 ; i > finalQuestionId.length ; i++ ) {
+                        Submit submittedData =
+                        await apiServices.addResult(finalQuestionId[i], widget
+                            .email, userName, finalAnswer[i], lat.toString(), long
+                            .toString());
+                             print(submittedData);
+                      }
+
+
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => SubmitPage()));*/
+                              builder: (context) => SubmitPage()));
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,

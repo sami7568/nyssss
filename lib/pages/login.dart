@@ -219,11 +219,7 @@ Navigator.pop(context);
                             )),
                           ),
                         ),
-                        SizedBox(height: 30),
-                        Text(
-                          "Forgot Passwrod?",
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
+
                         SizedBox(height: 80),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
