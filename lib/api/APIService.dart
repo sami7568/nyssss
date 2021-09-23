@@ -139,11 +139,11 @@ class APIServices {
   
 
    // ignore: missing_return
-   Future<Submit> addResult(
-  List<dynamic> questionId,
+   Future<List<Submit>> addResult(
+  int questionId,
   String userEmail,
   String userName,
-  List<dynamic> answer,
+  String answer,
   String latitude,
   String longitude,
 ) async {
@@ -152,7 +152,7 @@ class APIServices {
         .post('https://nysapi.yestechsl.com:443/api/questions/addresults', data: {
       "QuestionID": questionId,
       "UserEmail": userEmail,
-  "UserName": userName,
+      "UserName": userName,
       "Answer": answer,
       "Latitude": latitude,
       "Longitude": longitude,
@@ -185,7 +185,7 @@ class APIServices {
     Dio dio = await launchDio();
     Response response = await dio
         .post('https://nysapi.yestechsl.com:443/api/users/changepassword', data: {
-     "Email": email,
+        "Email": email,
         "OldPassword": oldPassword,
         "NewPassword": newPassword,
     });

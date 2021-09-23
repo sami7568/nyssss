@@ -62,7 +62,7 @@ class MyDrawer extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatePassword()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => UpdatePassword(email: email,)));
               },
               child: ListTile(
                 leading: Icon(

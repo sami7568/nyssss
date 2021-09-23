@@ -97,7 +97,7 @@ class _RadYNState extends State<RadYN> {
               onChanged: (value) {
                 setState(() {
                   widget.val = value;
-                  print(widget.val);
+                  //print(widget.val);
                 });
 
               },
@@ -112,8 +112,7 @@ class _RadYNState extends State<RadYN> {
               onChanged: (value) {
                 setState(() {
                   widget.val = value;
-                  print(widget.val);
-
+//                  print(widget.val);
                 });
               },
               activeColor: Colors.black,

@@ -7,6 +7,8 @@ import 'package:project1/pages/login.dart';
 import 'package:project1/pages/signup/personal_info.dart';
 import 'package:project1/widgets/widgets.dart';
 
+import '../../widgets/ProgressHUD.dart';
+
 class OthersInfo extends StatefulWidget {
   const OthersInfo({
     Key key,
@@ -255,6 +257,12 @@ class _OthersInfoState extends State<OthersInfo> {
                           children: [
                             GestureDetector(
                               onTap: () async {
+                                showDialog(
+                                    builder: (BuildContext context) {
+                                      return ProgressDialog(message: "Creating Account, Please Wait",);
+                                    },
+                                    barrierDismissible: false,
+                                    context: context);
                                 if (globalFormKey.currentState.validate()) {
                                   var periodInstitutionQualification =
                                       periodInstQualController.text;
@@ -297,6 +305,7 @@ class _OthersInfoState extends State<OthersInfo> {
                                   );
                                   print(rspPersonal);
 
+                                  Navigator.pop(context);
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

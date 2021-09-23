@@ -5,7 +5,8 @@ import 'package:project1/pages/login.dart';
 import 'package:project1/widgets/widgets.dart';
 
 class UpdatePassword extends StatefulWidget {
-
+  final String email;
+  UpdatePassword({this.email});
   @override
   _UpdatePasswordState createState() => _UpdatePasswordState();
 }
@@ -19,6 +20,13 @@ class _UpdatePasswordState extends State<UpdatePassword> {
 
    GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
 
+String emaill;
+   @override
+  void initState() {
+     emaill= widget.email;
+     emailIdTextEditingController.text = widget.email;
+     super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,17 +73,18 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                                   color: Colors.white,
                                 )),
                             Expanded(
-                              child: TextFormField(
-                                controller: emailIdTextEditingController,
-                                style: TextStyle(color: Colors.black),
-                                decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  filled: true,
-                                  fillColor: Colors.grey[100],
-                                  hintText: "email",
-                                  hintStyle: TextStyle(color: Colors.black54),
+
+                              child: Container(
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[100]
                                 ),
-                              ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child:
+                                  Center(child: Text(emaill.toString(),style: TextStyle(),)),
+                                ),
+                              )
                             ),
                           ],
                         ),
@@ -145,7 +154,7 @@ class _UpdatePasswordState extends State<UpdatePassword> {
                                 onTap: () async {
                                   if (globalFormKey.currentState.validate()) {
                                     var email =
-                                        emailIdTextEditingController.text;
+                                        emaill;
                                     var oldPassword =
                                         passwordTextEditingController.text;
                                     var newPassword =

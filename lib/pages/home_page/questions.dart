@@ -10,6 +10,7 @@ import 'package:project1/pages/submit_page.dart';
 import 'package:project1/widgets/widgets.dart';
 import '../../api/APIService.dart';
 import '../../model/question_model.dart';
+import '../../widgets/ProgressHUD.dart';
 import 'choice_page.dart';
 import 'drawer.dart';
 
@@ -191,6 +192,8 @@ class _QuestionsState extends State<Questions> {
                           scaffoldKey.currentState
                           // ignore: deprecated_member_use
                               .showSnackBar(snackBar);
+                          finalAnswer.clear();
+                          finalQuestionId.clear();
                           return;
                         }
                         answerDataList.add(element.textEditingControllercontroller.text);
@@ -204,19 +207,21 @@ class _QuestionsState extends State<Questions> {
 
                       ynlist.forEach((element) {
                         int vale=element.val;
-                        if(vale==1){
+                         /*if(vale==0){
+                        final snackBar =
+                        SnackBar(content: Text("one or more Yes/no is unchecked"));
+                        scaffoldKey.currentState
+                        // ignore: deprecated_member_use
+                            .showSnackBar(snackBar);
+                        finalAnswer.clear();
+                        finalQuestionId.clear();
+                        return;
+                        }*/
+                         if(vale==1){
                           answerDataList.add("yes");
                         }
                         else if(vale==2) {
                           answerDataList.add("no");
-                        }else if(element.val==0){
-                          //
-                          final snackBar =
-                          SnackBar(content: Text("one or more Yes/no is unchecked"));
-                          scaffoldKey.currentState
-                          // ignore: deprecated_member_use
-                              .showSnackBar(snackBar);
-                          return;
                         }
                       });
 
@@ -245,6 +250,8 @@ class _QuestionsState extends State<Questions> {
                           scaffoldKey.currentState
                           // ignore: deprecated_member_use
                               .showSnackBar(snackBar);
+                          finalAnswer.clear();
+                          finalQuestionId.clear();
                           return;
                         }
                       });
@@ -262,24 +269,30 @@ class _QuestionsState extends State<Questions> {
                       });
                       questionIsPoor.forEach((element) {
                         finalQuestionId.add(element);
-                      });
+                         });
+                      print("question length");
+                      print(finalQuestionId.length);
 
-
+                      showDialog(
+                          builder: (BuildContext context) {
+                            return ProgressDialog(message: "Sending Answers! Please Wait",);
+                          },
+                          barrierDismissible: false,
+                          context: context);
                       //finalQuestionId list is questionid list
                       //finalAnswer list is answer list
-                      for( int i = 0 ; i > finalQuestionId.length ; i++ ) {
-                        Submit submittedData =
+                      for( int i = 0 ; i < finalQuestionId.length ; i++ ) {
                         await apiServices.addResult(finalQuestionId[i], widget
                             .email, userName, finalAnswer[i], lat.toString(), long
                             .toString());
-                             print(submittedData);
                       }
 
-                      //
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) => SubmitPage()));
+                      //to stop loader
+                      Navigator.pop(context);
+                       Navigator.push(
+                           context,
+                           MaterialPageRoute(
+                               builder: (context) => SubmitPage()));
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,
