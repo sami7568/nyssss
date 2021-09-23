@@ -187,7 +187,7 @@ class _QuestionsState extends State<Questions> {
                         if(element.textEditingControllercontroller.text.isEmpty) {
                           //
                           final snackBar =
-                          SnackBar(content: Text("Unsuccess"));
+                          SnackBar(content: Text("One or more Text field is empty"));
                           scaffoldKey.currentState
                           // ignore: deprecated_member_use
                               .showSnackBar(snackBar);
@@ -209,10 +209,10 @@ class _QuestionsState extends State<Questions> {
                         }
                         else if(vale==2) {
                           answerDataList.add("no");
-                        }else{
+                        }else if(element.val==0){
                           //
                           final snackBar =
-                          SnackBar(content: Text("Unsuccess"));
+                          SnackBar(content: Text("one or more Yes/no is unchecked"));
                           scaffoldKey.currentState
                           // ignore: deprecated_member_use
                               .showSnackBar(snackBar);
@@ -238,10 +238,10 @@ class _QuestionsState extends State<Questions> {
                         else if(element.val==4){
                           answerDataList.add("excellent");
                         }
-                        else{
+                        else if(element.val==0){
                           //
                           final snackBar =
-                          SnackBar(content: Text("Unsuccess"));
+                          SnackBar(content: Text("One or more mulitple radio button is empty"));
                           scaffoldKey.currentState
                           // ignore: deprecated_member_use
                               .showSnackBar(snackBar);
@@ -275,11 +275,11 @@ class _QuestionsState extends State<Questions> {
                              print(submittedData);
                       }
 
-
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SubmitPage()));
+                      //
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => SubmitPage()));
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,

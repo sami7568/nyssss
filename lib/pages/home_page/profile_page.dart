@@ -64,6 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                                 color: Colors.grey[100],
                                                 child: Center(
                                                   child: Text(
+
                                                       "Name : ${snapshot.data[index].fullName}"),
                                                 ),
                                               ),
