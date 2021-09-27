@@ -161,26 +161,30 @@ String message = '';
                         SizedBox(height: 30),
                         GestureDetector(
                           onTap: () async {
-                            showDialog(
-                                   builder: (BuildContext context) { 
-                                     return ProgressDialog(message: "Authenticating, Please Wait",);
-                                    }, 
-                                    barrierDismissible: false,
-                                    context: context);
-                                    
-
-
-                            if(globalFormKey.currentState.validate()){
+                            if(emailIdTextEditingController.text.isEmpty || passwordTextEditingController.text.isEmpty){
+                              final snackBar = SnackBar(
+                                  content: Text("Email or password is empty"));
+                              scaffoldKey.currentState
+                              // ignore: deprecated_member_use
+                                  .showSnackBar(snackBar);
+                            }
+                            else{
+                              if(globalFormKey.currentState.validate()){
                               var email = emailIdTextEditingController.text;
                               var password = passwordTextEditingController.text;
-                              
                               setState(() {
                                 message = "please wait...";
                               });
+                              showDialog(
+                                  builder: (BuildContext context) {
+                                    return ProgressDialog(message: "Authenticating, Please Wait",);
+                                  },
+                                  barrierDismissible: false,
+                                  context: context);
+
                               LoginData rsp = await apiService.loginUser(email, password);
-                               
-Navigator.pop(context);
-                              
+
+                                Navigator.pop(context);
 
                                 if (rsp.message == "Succeed") {
                                     final snackBar = SnackBar(
@@ -192,23 +196,22 @@ Navigator.pop(context);
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => HomePage(email: email,password: password)));
-                                   
+
 
                                   } else {
                                     final snackBar =
-                                        SnackBar(content: Text("Unsuccess"));
+                                        SnackBar(content: Text("Email or Password is incorrect"));
                                     scaffoldKey.currentState
                                         // ignore: deprecated_member_use
                                         .showSnackBar(snackBar);
                                         // Navigator.pop(context);
-                                        
+
                                   }
                               // });
                               print(requestModel.toJson());
                             }
-                            
+                            }
                             },
-                            
                           child: Container(
                             width: MediaQuery.of(context).size.width,
                             height: 50,

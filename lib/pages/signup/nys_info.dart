@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:project1/api/APIService.dart';
 import 'package:project1/widgets/widgets.dart';
 
@@ -52,7 +53,7 @@ class NYSInfoState extends State<NYSInfo> {
   TextEditingController districtController = new TextEditingController();
 
 GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
-
+DateTime datee;
 APIServices apiServices;
 
 @override
@@ -119,22 +120,37 @@ void initState() {
                           ),
                         ),
                         SizedBox(height: 20),
-                        TextFormField(
-                          controller: dateRegController,
-                          validator: (value){
-                            if (value.isEmpty){
-                              return "The field should not be empty";
-                            }
-                          },
-                          style: TextStyle(color: Colors.black),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            filled: true,
-                            fillColor: Colors.grey[300],
-                            hintText: " Date of Registeration",
-                            hintStyle: TextStyle(color: Colors.black54),
-                          ),
+                        TextButton(
+                            onPressed: () {
+                            DatePicker.showDatePicker(context,
+                            showTitleActions: true,
+                            minTime: DateTime(2021, 3, 5),
+                            maxTime: DateTime(2025, 6, 7),
+                                onChanged: (date) {
+                                  print('change $date');
+                                  },
+                                onConfirm: (date) {
+                                  print('confirm $date');
+                                  setState(() {
+                                    datee=date;
+                                  });
+                                  },
+                                currentTime: DateTime.now(), locale: LocaleType.en);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width-10,
+                              height: 50,
+                              decoration: BoxDecoration(color: Colors.grey[300]),
+                              child: Center(child: Text(datee==null?"Select Date of Registration":datee.toString(), style: TextStyle(color: Colors.black),)),
+                            ),
                         ),
+                       /* Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          decoration: BoxDecoration(color: Colors.grey[300]),
+                          child: Center(child: Text(datee.toString())),
+                        ),
+                       */
                         SizedBox(height: 20),
                         TextFormField(
                           controller: placePrimController,
@@ -260,7 +276,7 @@ void initState() {
                    if (globalFormKey.currentState.validate()) {
                                 var nysCall = nysNumController.text;
                   
-                                var dateReg = dateRegController.text;
+                                var dateReg = datee.toString();
                                 var placePrim = placePrimController.text;
                                 var localGovt = localGovtController.text;
                                 var communDev = commDevController.text;

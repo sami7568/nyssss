@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:project1/api/APIService.dart';
 import 'package:project1/model/signUp_model.dart';
 import 'package:project1/pages/login.dart';
@@ -52,7 +53,9 @@ class OthersInfo extends StatefulWidget {
 }
 
 class _OthersInfoState extends State<OthersInfo> {
-  TextEditingController periodInstQualController = new TextEditingController();
+  TextEditingController periodController = new TextEditingController();
+  TextEditingController InstController = new TextEditingController();
+  TextEditingController QualController = new TextEditingController();
 
   TextEditingController areaSpecController = new TextEditingController();
 
@@ -67,7 +70,6 @@ class _OthersInfoState extends State<OthersInfo> {
   TextEditingController periaodCovReportController =
       new TextEditingController();
 
-  TextEditingController periodController = new TextEditingController();
 
   TextEditingController institutionController = new TextEditingController();
 
@@ -134,7 +136,7 @@ class _OthersInfoState extends State<OthersInfo> {
                     child: Column(
                       children: [
                         TextFormField(
-                          controller: periodInstQualController,
+                          controller: periodController,
                           validator: (value){
                             if (value.isEmpty){
                               return "The field should not be empty";
@@ -145,7 +147,41 @@ class _OthersInfoState extends State<OthersInfo> {
                             border: InputBorder.none,
                             filled: true,
                             fillColor: Colors.grey[300],
-                            hintText: " Period Institution Qualification",
+                            hintText: " Period",
+                            hintStyle: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        TextFormField(
+                          controller: InstController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            filled: true,
+                            fillColor: Colors.grey[300],
+                            hintText: "Institution",
+                            hintStyle: TextStyle(color: Colors.black54),
+                          ),
+                        ),
+                        SizedBox(height: 20),
+                        TextFormField(
+                          controller: QualController,
+                          validator: (value){
+                            if (value.isEmpty){
+                              return "The field should not be empty";
+                            }
+                          },
+                          style: TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            filled: true,
+                            fillColor: Colors.grey[300],
+                            hintText: "Qualification",
                             hintStyle: TextStyle(color: Colors.black54),
                           ),
                         ),
@@ -264,8 +300,10 @@ class _OthersInfoState extends State<OthersInfo> {
                                     barrierDismissible: false,
                                     context: context);
                                 if (globalFormKey.currentState.validate()) {
+                                  var pperiodInstitutionQualificationn= periodController.text + "/" + InstController.text +"/"  +QualController.text;
+                                  print(pperiodInstitutionQualificationn);
                                   var periodInstitutionQualification =
-                                      periodInstQualController.text;
+                                      pperiodInstitutionQualificationn;
                                   var areaofSpecialization =
                                       areaSpecController.text;
                                   var districtofOrigin =
@@ -278,7 +316,7 @@ class _OthersInfoState extends State<OthersInfo> {
                                   var periodCoveredByreport =
                                       periaodCovReportController.text;
 
-                                  SignupUser rspPersonal =
+                                  String rspPersonal =
                                       await apiServices.registerUser(
                                     widget.fullName,
                                     widget.email,
@@ -304,8 +342,16 @@ class _OthersInfoState extends State<OthersInfo> {
                                     periodCoveredByreport,
                                   );
                                   print(rspPersonal);
-
                                   Navigator.pop(context);
+                                  Fluttertoast.showToast(
+                                      msg: rspPersonal,
+                                      toastLength: Toast.LENGTH_SHORT,
+                                      gravity: ToastGravity.BOTTOM,
+                                      timeInSecForIosWeb: 1,
+                                      backgroundColor: Colors.green,
+                                      textColor: Colors.white,
+                                      fontSize: 16.0
+                                  );
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

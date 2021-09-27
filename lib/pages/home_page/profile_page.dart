@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project1/api/APIService.dart';
 import 'package:project1/model/login_model.dart';
-import 'package:project1/pages/home_page/drawer.dart';
+import 'package:project1/widgets/drawer.dart';
 import 'package:project1/widgets/widgets.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -19,6 +19,12 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        iconTheme: IconThemeData(color: Colors.black),
+      ),
       body: Stack(
         children: [
           BackgroundImage(),

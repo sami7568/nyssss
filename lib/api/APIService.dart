@@ -5,6 +5,7 @@
 import 'package:dio/dio.dart';
 import 'package:project1/model/category_model.dart';
 import 'package:project1/model/login_model.dart';
+import 'package:project1/model/modelPass.dart';
 import 'package:project1/model/password_model.dart';
 import 'package:project1/model/question_model.dart';
 
@@ -42,7 +43,7 @@ class APIServices {
   }
 
   // ignore: missing_return
-  Future<SignupUser> registerUser(
+  Future<String> registerUser(
       String fullName,
       String email,
       String contactNo,
@@ -79,7 +80,7 @@ class APIServices {
       "PlaceofPrimaryAssignment": placeofPrimaryAssignment,
       "localGovtArea": localGovtArea,
       "CommunityDevelopmentProject": communityDevelopmentProject,
-     "LocationOfProject": locationOfProject,
+       "LocationOfProject": locationOfProject,
         "DateofRegistration": dateofRegistration,
         "Period_Institution_Qualification": periodInstitutionQualification,
         "AreaofSpecialization": areaofSpecialization,
@@ -91,6 +92,7 @@ class APIServices {
     });
     if (response.statusCode == 200) {
       print('${response.data}');
+      return response.statusMessage;
     }
     
   }
@@ -100,7 +102,7 @@ class APIServices {
     Dio dio = await launchDio();
 
     Response response =
-        await dio.get('https://nysapi.yestechsl.com:443/api/users/login?email=${email}&password=${password}');
+        await dio.get('https://nysapi.yestechsl.com/api/users/login?email=${email}&password=${password}');
     if (response.statusCode == 200) {
       final body = response.data;
       return LoginData(message: body['message'],);
@@ -115,7 +117,7 @@ class APIServices {
     Dio _dio = await launchDio();
 
     Response response = await _dio
-        .get('https://nysapi.yestechsl.com:443/api/users/profile?Email=${email}');
+        .get('https://nysapi.yestechsl.com/api/users/profile?Email=${email}');
     if (response.statusCode == 200) {
       LoginData profile = LoginData.fromJson(response.data);
       return profile.data;
@@ -136,31 +138,41 @@ class APIServices {
   }
 }
 
-  
 
    // ignore: missing_return
    Future<List<Submit>> addResult(
-  int questionId,
+  List<dynamic> questionId,
   String userEmail,
   String userName,
-  String answer,
+  List<dynamic> answer,
   String latitude,
   String longitude,
+       int questionCategory,
+
 ) async {
+
     Dio dio = await launchDio();
     Response response = await dio
-        .post('https://nysapi.yestechsl.com:443/api/questions/addresults', data: {
-      "QuestionID": questionId,
+        .post('https://nysapi.yestechsl.com/api/questions/addresults', data: {
       "UserEmail": userEmail,
       "UserName": userName,
-      "Answer": answer,
       "Latitude": latitude,
       "Longitude": longitude,
+      'QuestionCategory':questionCategory,
+      "QuestionAnswersArray" :[
+          for(var i =0;i<answer.length;i++){
+          "QuestionId":questionId[i],
+          "Answer":answer[i],
+        },
+      ],
     });
     if (response.statusCode == 200) {
       print('${response.data}');
+      print(response.statusMessage);
+      DataUpdate category = DataUpdate.fromJson(response.data);
+      completedmessage = category.message;
+
     }
-    
   }
 
 // ignore: missing_return
@@ -168,7 +180,7 @@ class APIServices {
     Dio _dio = await launchDio();
    
     Response response = await _dio
-        .get('https://nysapi.yestechsl.com:443/api/questions/getbycategory?Category=${typeId}');
+        .get('https://nysapi.yestechsl.com/api/questions/getbycategory?Category=${typeId}');
     if (response.statusCode == 200) {
       CatType categorytype = CatType.fromJson(response.data);
        questionsdata = categorytype.data;
@@ -178,28 +190,30 @@ class APIServices {
 }
 
  // ignore: missing_return
-  Future<ChangePassword> changePassword(
+  Future<String> changePassword(
       String email,
     String oldPassword,
     String newPassword) async {
     Dio dio = await launchDio();
     Response response = await dio
-        .post('https://nysapi.yestechsl.com:443/api/users/changepassword', data: {
+        .post('https://nysapi.yestechsl.com/api/users/changepassword', data: {
         "Email": email,
         "OldPassword": oldPassword,
         "NewPassword": newPassword,
     });
     if (response.statusCode == 200) {
       print('${response.data}');
+      DataUpdate category = DataUpdate.fromJson(response.data);
+      print(category.message);
+      return category.message;
     }
-    
   }
 
 
 }
 
 
-
+String completedmessage;
 
 
 

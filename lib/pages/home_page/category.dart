@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:project1/api/APIService.dart';
 import 'package:project1/model/question_model.dart';
-import 'package:project1/pages/home_page/drawer.dart';
+import 'package:project1/widgets/drawer.dart';
 import 'package:project1/pages/home_page/questions.dart';
 import 'package:project1/widgets/widgets.dart';
 import 'package:geolocator/geolocator.dart';
@@ -88,11 +88,7 @@ class _HomePageState extends State<HomePage> {
                                   onTap: () async{
                                    setState(() {
                                      typeId = snapshot.data[index].id;
-                                     
                                    });
-                                     
-                                    
-                                    
                                     Navigator.push(context, MaterialPageRoute(builder: (context) => Questions(email: widget.email,password: widget.password,)));
                                   },
                                   
