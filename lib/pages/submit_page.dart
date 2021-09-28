@@ -3,6 +3,8 @@ import 'package:project1/pages/home_page/category.dart';
 import 'package:project1/widgets/widgets.dart';
 
 class SubmitPage extends StatefulWidget {
+  String email;
+  SubmitPage({this.email});
   @override
   _SubmitPageState createState() => _SubmitPageState();
 }
@@ -46,7 +48,7 @@ class _SubmitPageState extends State<SubmitPage> {
                   GestureDetector(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomePage()));
+                          MaterialPageRoute(builder: (context) => HomePage(email: widget.email,)));
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width,

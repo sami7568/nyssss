@@ -9,16 +9,15 @@ import 'package:project1/pages/home_page/category.dart';
 import 'package:project1/pages/signup/personal_info.dart';
 import 'package:project1/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+
+String userEmail;
 class LoginPage extends StatefulWidget {
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-
 class _LoginPageState extends State<LoginPage> {
-
-    
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> globalFormKey = new GlobalKey<FormState>();
 
@@ -275,3 +274,4 @@ String message = '';
 
 
  }
+

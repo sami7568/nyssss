@@ -280,7 +280,6 @@ class _QuestionsState extends State<Questions> {
                             print(finalQuestionId.length);
 
                             if(noError==false){
-
                               print(QuestionAnswersArray().answer);
                             showDialog(
                                 builder: (BuildContext context) {
@@ -314,7 +313,7 @@ class _QuestionsState extends State<Questions> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => SubmitPage()));
+                                    builder: (context) => SubmitPage(email: widget.email,)));
                           }
                             else{
                               finalAnswer.clear();
