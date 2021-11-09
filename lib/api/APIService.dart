@@ -18,8 +18,6 @@ List<Question> questionsdata;
  int typeId = 0;
 
 class APIServices {
-
- 
   // String accessToken =
   //     "oDeWtZWM_QQcfsj5bcJotADwsojgrXpLq-fKt2te3mi6u7DOJwxF7hFVN7eNX_Pm7N9a-Z7YhaWZqnYcxtPClE05pW5AZcCWo9PM7IEyEslb1H-vHDfsNkWpXTNkdgL_G3ioF2Tq2ECoAQA39ciVueyledStIqWRe-bDb8uKUWcbofyyVtuA_gmub1EivLQ0pseMx7qvcCWG-2twgSrWU5RkHdlwy0wclRF7T_Wax23TC-Jgy4J60O10bkkiGXOwptwggX_ejjHVyh8gwpxMsj1KNJs3qwBG-nutLLkE_WaMdu9MKL67uOUdw5f2vDnI";
   Future<Dio> launchDio() async {
@@ -94,7 +92,6 @@ class APIServices {
       print('${response.data}');
       return response.statusMessage;
     }
-    
   }
 
   // ignore: missing_return
@@ -106,7 +103,6 @@ class APIServices {
     if (response.statusCode == 200) {
       final body = response.data;
       return LoginData(message: body['message'],);
-
     }
   }
 
